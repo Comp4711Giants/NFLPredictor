@@ -21,12 +21,25 @@ class Welcome extends Application {
     function index() {
         $this->data['pagebody'] = 'homepage';    // this is the view we want shown
         // build the list of authors, to pass on to our view
-        $source = $this->quotes->all();
-        $authors = array();
+        //$source = $this->quotes->all();
+        $source = $this->teams->all();
+        
+        $teamsAFC = array();
+        $teamsNFC = array();
+        
         foreach ($source as $record) {
-            $authors[] = array('who' => $record['who'], 'mug' => $record['mug'], 'href' => $record['where']);
+            if ($record['conference'] == "AFC") {
+                $teamsAFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
+                'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
+            }
+            if ($record['conference'] == "NFC") {
+                $teamsNFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
+                'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
+            }
         }
-        $this->data['authors'] = $authors;
+        
+        $this->data['teamsAFC'] = $teamsAFC;
+        $this->data['teamsNFC'] = $teamsNFC;
 
         $this->render();
     }
