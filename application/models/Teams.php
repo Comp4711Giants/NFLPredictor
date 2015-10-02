@@ -17,6 +17,9 @@ class Teams extends CI_Model {
         	'loses' => '1', 'ties' => '0'),
         array('id' => 'DAL', 'name' => 'Dallas Cowboys', 'conference' => 'NFC', 'region' => 'east', 'wins' => '2', 
         	'loses' => '1', 'ties' => '0'),
+        array('id' => 'NYG', 'name' => 'New York Giants', 'conference' => 'NFC', 'region' => 'east', 'wins' => '1',	 'loses' => '2', 'ties' => '0'),
+        array('id' => 'WAS', 'name' => 'Washington Redskins', 'conference' => 'NFC', 'region' => 'east', 'wins' => '1',	 'loses' => '2', 'ties' => '0'),
+        array('id' => 'PHI', 'name' => 'Philadelphia Eagles', 'conference' => 'NFC', 'region' => 'east', 'wins' => '1',	 'loses' => '2', 'ties' => '0'),
     );
 
     // Constructor
