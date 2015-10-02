@@ -38,7 +38,9 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "Welcome";
+$route['roster'] = 'Player';
+$route['roster/(:num)'] = 'Player/get/$1';
 $route['404_override'] = '';
 $route['sleep'] = 'first/zzz';
 $route['lock/(:any)/(:any)'] = 'welcome/shucks';

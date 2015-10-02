@@ -6,8 +6,8 @@ if (!defined('BASEPATH'))
 // the menu basics (text navbar)
 $config['menu_choices'] = array(
     'menudata' => array(
-        array('name' => 'First', 'link' => '/first'),
-        array('name' => 'Last', 'link' => '/last'),
+        array('name' => 'Player Roster', 'link' => '/roster'),
+        
         )
     );
 
