@@ -23,10 +23,10 @@ if (!defined('APPPATH'))
         <div class="container">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <a class="brand" href="/"><img src="/assets/images/logo.png"/></a>
                     {menubar} </div>
             </div>           
             <div id="content">
+                <a class="brand" href="/"><img src="/assets/images/Giants_1976.png"/></a>
                 <h1>{title}</h1>
                 {content}
             </div>
