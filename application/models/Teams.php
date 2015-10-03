@@ -58,6 +58,28 @@ class Teams extends CI_Model {
                 return $record;
         return null;
     }
+    
+    // retrieve AFC teams
+    public function getAFC() {
+        $teamsAFC = array();
+        // iterate over the data until we find all the ones we want
+        foreach ($this->data as $record)
+            if ($record['conference'] == "AFC")
+                $teamsAFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
+                'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
+        return $teamsAFC;
+    }
+    
+    // retrieve NFC teams
+    public function getNFC() {
+        $teamsNFC = array();
+        // iterate over the data until we find all the ones we want
+        foreach ($this->data as $record)
+            if ($record['conference'] == "NFC")
+                $teamsNFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
+                'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
+        return $teamsNFC;
+    }
 
     // retrieve all of the quotes
     public function all() {
