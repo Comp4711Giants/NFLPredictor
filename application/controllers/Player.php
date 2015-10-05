@@ -43,7 +43,6 @@ class Player extends Application {
 
     function get($number) {
         $this->data['pagebody'] = 'singlePlayerView';    // this is the view we want shown
-        // get the author and quote of the id passe by the route, to pass on to our view
         $roster = $this->players->get($number);
         $this->data = array_merge($this->data, $roster);
 

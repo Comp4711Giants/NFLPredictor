@@ -77,61 +77,61 @@ class Players extends CI_Model {
         	'position' => 'G', 'where'=>'/roster/32'),
         array('id' => '33', 'who' => 'Brett Jones', 'mug' => 'jones.png', 'number' => '69', 
         	'position' => 'C', 'where'=>'/roster/33'),
-        array('id' => '34', 'who' => 'Devon Kennard', 'mug' => 'kennard.jpg', 'number' => '59',
+        array('id' => '34', 'who' => 'Devon Kennard', 'mug' => 'kennard.png', 'number' => '59',
             'position' => 'OLB', 'where'=>'/roster/34'),
-        array('id' => '35', 'who' => 'Markus Kuhn', 'mug' => 'kuhn.jpg', 'number' => '78',
+        array('id' => '35', 'who' => 'Markus Kuhn', 'mug' => 'kuhn.png', 'number' => '78',
             'position' => 'DT', 'where'=>'/roster/35'),
-        array('id' => '36', 'who' => 'Eli Manning', 'mug' => 'manning.jpg', 'number' => '10',
+        array('id' => '36', 'who' => 'Eli Manning', 'mug' => 'manning.png', 'number' => '10',
             'position' => 'QB', 'where'=>'/roster/36'),
-        array('id' => '37', 'who' => 'Trumaine McBride', 'mug' => 'mcbride.jpg', 'number' => '38',
+        array('id' => '37', 'who' => 'Trumaine McBride', 'mug' => 'mcbride.png', 'number' => '38',
             'position' => 'CB', 'where'=>'/roster/37'),
-        array('id' => '38', 'who' => 'Brandon Meriweather', 'mug' => 'meriweather.jpg', 'number' => '22',
+        array('id' => '38', 'who' => 'Brandon Meriweather', 'mug' => 'meriweather.png', 'number' => '22',
             'position' => 'SS', 'where'=>'/roster/38'),
-        array('id' => '39', 'who' => 'Damontre Moore', 'mug' => 'moore.jpg', 'number' => '98',
+        array('id' => '39', 'who' => 'Damontre Moore', 'mug' => 'moore.png', 'number' => '98',
             'position' => 'DE', 'where'=>'/roster/39'),
-        array('id' => '40', 'who' => 'Brandon Mosley', 'mug' => 'mosley.jpg', 'number' => '75',
+        array('id' => '40', 'who' => 'Brandon Mosley', 'mug' => 'mosley.png', 'number' => '75',
             'position' => 'G', 'where'=>'/roster/40'),
-        array('id' => '41', 'who' => 'Ryan Nassib', 'mug' => 'nassib.jpg', 'number' => '12',
+        array('id' => '41', 'who' => 'Ryan Nassib', 'mug' => 'nassib.png', 'number' => '12',
             'position' => 'QB', 'where'=>'/roster/41'),
-        array('id' => '42', 'who' => 'Marshall Newhouse', 'mug' => 'newhouse.jpg', 'number' => '73',
+        array('id' => '42', 'who' => 'Marshall Newhouse', 'mug' => 'newhouse.png', 'number' => '73',
             'position' => 'OT', 'where'=>'/roster/42'),
-        array('id' => '43', 'who' => 'Louis Nix', 'mug' => 'nix.jpg', 'number' => '92',
+        array('id' => '43', 'who' => 'Louis Nix', 'mug' => 'nix.png', 'number' => '92',
             'position' => 'DT', 'where'=>'/roster/43'),
-        array('id' => '44', 'who' => 'Owamagbe Odighizuwa', 'mug' => 'odighizuwa.jpg', 'number' => '58',
+        array('id' => '44', 'who' => 'Owamagbe Odighizuwa', 'mug' => 'odighizuwa.png', 'number' => '58',
             'position' => 'DE', 'where'=>'/roster/44'),
-        array('id' => '45', 'who' => 'Justin Pugh', 'mug' => 'pugh.jpg', 'number' => '67',
+        array('id' => '45', 'who' => 'Justin Pugh', 'mug' => 'pugh.png', 'number' => '67',
             'position' => 'OG', 'where'=>'/roster/45'),
-        array('id' => '46', 'who' => 'Rueben Randle', 'mug' => 'randle.jpg', 'number' => '82',
+        array('id' => '46', 'who' => 'Rueben Randle', 'mug' => 'randle.png', 'number' => '82',
             'position' => 'WR', 'where'=>'/roster/46'),
-        array('id' => '47', 'who' => 'Dallas Reynolds', 'mug' => 'reynolds.jpg', 'number' => '61',
+        array('id' => '47', 'who' => 'Dallas Reynolds', 'mug' => 'reynolds.png', 'number' => '61',
             'position' => 'G', 'where'=>'/roster/47'),
-        array('id' => '48', 'who' => 'Weston Richburg', 'mug' => 'richburg.jpg', 'number' => '70',
+        array('id' => '48', 'who' => 'Weston Richburg', 'mug' => 'richburg.png', 'number' => '70',
             'position' => 'C', 'where'=>'/roster/48'),
-        array('id' => '49', 'who' => 'Dominique Rodgers-Cromartie', 'mug' => 'rodgers-cromartie.jpg', 'number' => '41',
+        array('id' => '49', 'who' => 'Dominique Rodgers-Cromartie', 'mug' => 'rodgers-cromartie.png', 'number' => '41',
             'position' => 'CB', 'where'=>'/roster/49'),
-        array('id' => '50', 'who' => 'Geoff Schwartz', 'mug' => 'schwartz.jpg', 'number' => '74',
+        array('id' => '50', 'who' => 'Geoff Schwartz', 'mug' => 'schwartz.png', 'number' => '74',
             'position' => 'G', 'where'=>'/roster/50'),
-        array('id' => '51', 'who' => 'George Selvie', 'mug' => 'selvie.jpg', 'number' => '93',
+        array('id' => '51', 'who' => 'George Selvie', 'mug' => 'selvie.png', 'number' => '93',
             'position' => 'DE', 'where'=>'/roster/51'),
-        array('id' => '52', 'who' => 'Cooper Taylor', 'mug' => 'taylor.jpg', 'number' => '30',
+        array('id' => '52', 'who' => 'Cooper Taylor', 'mug' => 'taylor.png', 'number' => '30',
             'position' => 'DB', 'where'=>'/roster/52'),
-        array('id' => '53', 'who' => 'J.T. Thomas', 'mug' => 'thomas.jpg', 'number' => '55',
+        array('id' => '53', 'who' => 'J.T. Thomas', 'mug' => 'thomas.png', 'number' => '55',
             'position' => 'OLB', 'where'=>'/roster/53'),
-        array('id' => '54', 'who' => 'Mykkele Thompson', 'mug' => 'thompson.jpg', 'number' => '33',
+        array('id' => '54', 'who' => 'Mykkele Thompson', 'mug' => 'thompson.png', 'number' => '33',
             'position' => 'DB', 'where'=>'/roster/54'),
-        array('id' => '55', 'who' => 'Uani\' Unga', 'mug' => 'unga.jpg', 'number' => '47',
+        array('id' => '55', 'who' => 'Uani\' Unga', 'mug' => 'unga.png', 'number' => '47',
             'position' => 'MLB', 'where'=>'/roster/55'),
-        array('id' => '56', 'who' => 'Shane Vereen', 'mug' => 'vereen.jpg', 'number' => '34',
+        array('id' => '56', 'who' => 'Shane Vereen', 'mug' => 'vereen.png', 'number' => '34',
             'position' => 'RB', 'where'=>'/roster/56'),
-        array('id' => '57', 'who' => 'Trevin Wade', 'mug' => 'wade.jpg', 'number' => '31',
+        array('id' => '57', 'who' => 'Trevin Wade', 'mug' => 'wade.png', 'number' => '31',
             'position' => 'DB', 'where'=>'/roster/57'),
-        array('id' => '58', 'who' => 'Nikita Whitlock', 'mug' => 'whitlock.jpg', 'number' => '49',
+        array('id' => '58', 'who' => 'Nikita Whitlock', 'mug' => 'whitlock.png', 'number' => '49',
             'position' => 'RB', 'where'=>'/roster/58'),
-        array('id' => '59', 'who' => 'Andre Williams', 'mug' => 'williams.jpg', 'number' => '44',
+        array('id' => '59', 'who' => 'Andre Williams', 'mug' => 'williams.png', 'number' => '44',
             'position' => 'RB', 'where'=>'/roster/59'),
-        array('id' => '60', 'who' => 'Brad Wing', 'mug' => 'wing.jpg', 'number' => '9',
+        array('id' => '60', 'who' => 'Brad Wing', 'mug' => 'wing.png', 'number' => '9',
             'position' => 'P', 'where'=>'/roster/60'),
-        array('id' => '61', 'who' => 'Kerry Wynn', 'mug' => 'wynn.jpg', 'number' => '72',
+        array('id' => '61', 'who' => 'Kerry Wynn', 'mug' => 'wynn.png', 'number' => '72',
             'position' => 'DE', 'where'=>'/roster/61'),
     );
 
@@ -140,29 +140,13 @@ class Players extends CI_Model {
         parent::__construct();
     }
 
-    // retrieve a single quote
+    // retrieve a single player
     public function get($which) {
         // iterate over the data until we find the one we want
         foreach ($this->data as $record)
             if ($record['id'] == $which)
                 return $record;
         return null;
-    }
-
-    // retrieve all of the quotes
-    public function all() {
-        return $this->data;
-    }
-
-    // retrieve the first quote
-    public function first() {
-        return $this->data[0];
-    }
-
-    // retrieve the last quote
-    public function last() {
-        $index = count($this->data) - 1;
-        return $this->data[$index];
     }
 
 }
