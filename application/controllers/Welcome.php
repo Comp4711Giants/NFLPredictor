@@ -8,20 +8,20 @@ class Welcome extends Application {
 
     function index() {
         $this->data['pagebody'] = 'homepage';    // this is the view we want shown
-        $source = $this->teams->all();
+        $sourceAFC = $this->teams->getAFC();
+        $sourceNFC = $this->teams->getNFC();
         
         $teamsAFC = array();
         $teamsNFC = array();
         
-        foreach ($source as $record) {
-            if ($record['conference'] == "AFC") {
+        foreach ($sourceAFC as $record) {
                 $teamsAFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
                 'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
-            }
-            if ($record['conference'] == "NFC") {
+        }
+        
+        foreach ($sourceNFC as $record) {
                 $teamsNFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
                 'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
-            }
         }
         
         $this->data['teamsAFC'] = $teamsAFC;
