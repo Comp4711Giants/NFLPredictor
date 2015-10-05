@@ -77,6 +77,62 @@ class Players extends CI_Model {
         	'position' => 'G', 'where'=>'/roster/32'),
         array('id' => '33', 'who' => 'Brett Jones', 'mug' => 'jones.png', 'number' => '69', 
         	'position' => 'C', 'where'=>'/roster/33'),
+        array('id' => '34', 'who' => 'Devon Kennard', 'mug' => 'kennard.png', 'number' => '59',
+            'position' => 'OLB', 'where'=>'/roster/34'),
+        array('id' => '35', 'who' => 'Markus Kuhn', 'mug' => 'kuhn.png', 'number' => '78',
+            'position' => 'DT', 'where'=>'/roster/35'),
+        array('id' => '36', 'who' => 'Eli Manning', 'mug' => 'manning.png', 'number' => '10',
+            'position' => 'QB', 'where'=>'/roster/36'),
+        array('id' => '37', 'who' => 'Trumaine McBride', 'mug' => 'mcbride.png', 'number' => '38',
+            'position' => 'CB', 'where'=>'/roster/37'),
+        array('id' => '38', 'who' => 'Brandon Meriweather', 'mug' => 'meriweather.png', 'number' => '22',
+            'position' => 'SS', 'where'=>'/roster/38'),
+        array('id' => '39', 'who' => 'Damontre Moore', 'mug' => 'moore.png', 'number' => '98',
+            'position' => 'DE', 'where'=>'/roster/39'),
+        array('id' => '40', 'who' => 'Brandon Mosley', 'mug' => 'mosley.png', 'number' => '75',
+            'position' => 'G', 'where'=>'/roster/40'),
+        array('id' => '41', 'who' => 'Ryan Nassib', 'mug' => 'nassib.png', 'number' => '12',
+            'position' => 'QB', 'where'=>'/roster/41'),
+        array('id' => '42', 'who' => 'Marshall Newhouse', 'mug' => 'newhouse.png', 'number' => '73',
+            'position' => 'OT', 'where'=>'/roster/42'),
+        array('id' => '43', 'who' => 'Louis Nix', 'mug' => 'nix.png', 'number' => '92',
+            'position' => 'DT', 'where'=>'/roster/43'),
+        array('id' => '44', 'who' => 'Owamagbe Odighizuwa', 'mug' => 'odighizuwa.png', 'number' => '58',
+            'position' => 'DE', 'where'=>'/roster/44'),
+        array('id' => '45', 'who' => 'Justin Pugh', 'mug' => 'pugh.png', 'number' => '67',
+            'position' => 'OG', 'where'=>'/roster/45'),
+        array('id' => '46', 'who' => 'Rueben Randle', 'mug' => 'randle.png', 'number' => '82',
+            'position' => 'WR', 'where'=>'/roster/46'),
+        array('id' => '47', 'who' => 'Dallas Reynolds', 'mug' => 'reynolds.png', 'number' => '61',
+            'position' => 'G', 'where'=>'/roster/47'),
+        array('id' => '48', 'who' => 'Weston Richburg', 'mug' => 'richburg.png', 'number' => '70',
+            'position' => 'C', 'where'=>'/roster/48'),
+        array('id' => '49', 'who' => 'Dominique Rodgers-Cromartie', 'mug' => 'rodgers-cromartie.png', 'number' => '41',
+            'position' => 'CB', 'where'=>'/roster/49'),
+        array('id' => '50', 'who' => 'Geoff Schwartz', 'mug' => 'schwartz.png', 'number' => '74',
+            'position' => 'G', 'where'=>'/roster/50'),
+        array('id' => '51', 'who' => 'George Selvie', 'mug' => 'selvie.png', 'number' => '93',
+            'position' => 'DE', 'where'=>'/roster/51'),
+        array('id' => '52', 'who' => 'Cooper Taylor', 'mug' => 'taylor.png', 'number' => '30',
+            'position' => 'DB', 'where'=>'/roster/52'),
+        array('id' => '53', 'who' => 'J.T. Thomas', 'mug' => 'thomas.png', 'number' => '55',
+            'position' => 'OLB', 'where'=>'/roster/53'),
+        array('id' => '54', 'who' => 'Mykkele Thompson', 'mug' => 'thompson.png', 'number' => '33',
+            'position' => 'DB', 'where'=>'/roster/54'),
+        array('id' => '55', 'who' => 'Uani\' Unga', 'mug' => 'unga.png', 'number' => '47',
+            'position' => 'MLB', 'where'=>'/roster/55'),
+        array('id' => '56', 'who' => 'Shane Vereen', 'mug' => 'vereen.png', 'number' => '34',
+            'position' => 'RB', 'where'=>'/roster/56'),
+        array('id' => '57', 'who' => 'Trevin Wade', 'mug' => 'wade.png', 'number' => '31',
+            'position' => 'DB', 'where'=>'/roster/57'),
+        array('id' => '58', 'who' => 'Nikita Whitlock', 'mug' => 'whitlock.png', 'number' => '49',
+            'position' => 'RB', 'where'=>'/roster/58'),
+        array('id' => '59', 'who' => 'Andre Williams', 'mug' => 'williams.png', 'number' => '44',
+            'position' => 'RB', 'where'=>'/roster/59'),
+        array('id' => '60', 'who' => 'Brad Wing', 'mug' => 'wing.png', 'number' => '9',
+            'position' => 'P', 'where'=>'/roster/60'),
+        array('id' => '61', 'who' => 'Kerry Wynn', 'mug' => 'wynn.png', 'number' => '72',
+            'position' => 'DE', 'where'=>'/roster/61'),
     );
 
     // Constructor
@@ -84,7 +140,7 @@ class Players extends CI_Model {
         parent::__construct();
     }
 
-    // retrieve a single quote
+    // retrieve a single player
     public function get($which) {
         // iterate over the data until we find the one we want
         foreach ($this->data as $record)
@@ -93,20 +149,8 @@ class Players extends CI_Model {
         return null;
     }
 
-    // retrieve all of the quotes
+    // retrieve all of the players
     public function all() {
         return $this->data;
     }
-
-    // retrieve the first quote
-    public function first() {
-        return $this->data[0];
-    }
-
-    // retrieve the last quote
-    public function last() {
-        $index = count($this->data) - 1;
-        return $this->data[$index];
-    }
-
 }
