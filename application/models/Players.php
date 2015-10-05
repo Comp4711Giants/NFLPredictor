@@ -149,4 +149,8 @@ class Players extends CI_Model {
         return null;
     }
 
+    // retrieve all of the players
+    public function all() {
+        return $this->data;
+    }
 }

@@ -8,7 +8,7 @@ $config['menu_choices'] = array(
     'menudata' => array(
         array('name' => 'Home', 'link' => '/'),
         array('name' => 'Player Roster', 'link' => '/roster'),
-        
+        array('name' => 'About', 'link' => '/about'),
         )
     );
 
