@@ -7,6 +7,7 @@ if (!defined('BASEPATH'))
 $config['menu_choices'] = array(
     'menudata' => array(
         array('name' => 'Home', 'link' => '/'),
+        array('name' => 'League Info', 'link' => '/teams'),
         array('name' => 'Player Roster', 'link' => '/roster'),
         array('name' => 'About', 'link' => '/about'),
         )
