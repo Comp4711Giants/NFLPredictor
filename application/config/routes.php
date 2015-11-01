@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "Welcome";
 $route['about'] = "Welcome/about";
+$route['teams'] = 'Team';
 $route['roster'] = 'Player';
 $route['roster/(:num)'] = 'Player/get/$1';
 $route['404_override'] = '';
