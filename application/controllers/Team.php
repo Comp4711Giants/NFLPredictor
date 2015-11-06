@@ -7,7 +7,7 @@ class Team extends Application {
     }
 
     function index() {
-        $this->data['pagebody'] = 'teamStats';    // this is the view we want shown
+        $this->data['pagebody'] = 'teamsView';    // this is the view we want shown
         $sourceAFC = $this->teams->getAFC();
         $sourceNFC = $this->teams->getNFC();
         
@@ -15,13 +15,13 @@ class Team extends Application {
         $teamsNFC = array();
         
         foreach ($sourceAFC as $record) {
-                $teamsAFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
-                'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
+                $teamsAFC[] = array('id' => $record['id'], 'name' => $record['name'], 'city' => $record['city'], 'conference' => $record['conference'], 'division' => $record['division'],
+                'logo' => $record['logo']);
         }
         
         foreach ($sourceNFC as $record) {
-                $teamsNFC[] = array('id' => $record['id'], 'name' => $record['name'], 'conference' => $record['conference'], 'region' => $record['region'],
-                'wins' => $record['wins'], 'loses' => $record['loses'], 'ties' => $record['ties']);
+                $teamsNFC[] = array('id' => $record['id'], 'name' => $record['name'], 'city' => $record['city'], 'conference' => $record['conference'], 'division' => $record['division'],
+                'logo' => $record['logo']);
         }
         
         $this->data['teamsAFC'] = $teamsAFC;

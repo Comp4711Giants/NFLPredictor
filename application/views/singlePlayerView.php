@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span3"><img src="/data/{mug}" title="{who}"/></div>
+    <div class="span3"><img src="/data/mugs/{mug}" title="{who}"/></div>
     <div class="span8 offset1">    
         <p class="lead">{who}</p><br/>
         <p>Number: {number}</p></br>
