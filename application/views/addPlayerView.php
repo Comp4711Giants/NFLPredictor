@@ -1,0 +1,1 @@
+<a href = './admin/edit'>Switch to Edit Player</a>

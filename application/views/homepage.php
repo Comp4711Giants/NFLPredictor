@@ -1,5 +1,1 @@
-<div class="row">
-    {authors}
-    <div class="span4"><a href="{href}"><img src="/data/{mug}" title="{who}"/></a></div>
-    {/authors}
-</div>
+<h3>Use menubar to navigate to desired section</h3>

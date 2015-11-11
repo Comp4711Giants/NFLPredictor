@@ -4,6 +4,7 @@
 		<th>Last Name</th>
 		<th>Jersey Number</th>
 		<th>Position</th>
+		<th>Admin</th>
 	</tr>
 
 	{players}
@@ -13,9 +14,11 @@
 		<td>{lastname}</td>
 		<td>{number}</td>
 		<td>{position}</td>
+		<td><a href = '/admin/edit'>Edit</a></td>
 	</tr>
+	<tr></tr>
 
 	{/players}
 
 </table>
-<a href = '/admin/add'>Edit</a>
+<a href = './admin/add'>Switch to Add Player</a>
