@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','parser');
+$autoload['libraries'] = array('parser');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('players', 'teams');
+$autoload['model'] = array('quotes');
 
 
 /* End of file autoload.php */

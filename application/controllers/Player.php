@@ -28,26 +28,25 @@ class Player extends Application {
     //-------------------------------------------------------------
 
     function index() {
-        $this->data['pagebody'] = 'playersView';    // this is the view we want shown
-        // build the list of players, to pass on to our view
-        $source = $this->players->all();
+        $this->data['pagebody'] = 'homepage';    // this is the view we want shown
+        // build the list of authors, to pass on to our view
+        $source = $this->Players->all();
         $players = array();
         foreach ($source as $record) {
-            $players[] = array('who' => $record->lastname . ", " . $record->firstname, 'mug' => $record->mug, 
-                'id' => $record->id, 'position' => $record->position, 'number' => $record->number);
+            $players[] = array('who' => $record['who'], 'mug' => $record['mug'], 'href' => $record['where']);
         }
-        $this->data['players'] = $players;
+        $this->data['authors'] = $players;
 
         $this->render();
     }
-    
-    function display($number) {
-        $this->data['pagebody'] = 'singlePlayerView';    // this is the view we want shown
-        $record = $this->players->get($number);
-        
-        $player = array('id' => $record->id, 'who' => $record->lastname . ", " . $record->firstname, 'mug' => $record->mug,
-            'number' => $record->number, 'position' => $record->position);
-        $this->data = array_merge($this->data, $player);
+
+    function get($number) {
+        $this->data['pagebody'] = 'justone';    // this is the view we want shown
+        // get the author and quote of the id passe by the route, to pass on to our view
+        $roster = $this->Players->get($number);
+        $this->data = array_merge($this->data, $roster);
+
         $this->render();
     }
+
 }
