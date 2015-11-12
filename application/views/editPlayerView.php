@@ -1,5 +1,6 @@
 <table cols="" border="0">
 	<tr>
+		<th>Photo</th>
 		<th>First Name</th>
 		<th>Last Name</th>
 		<th>Jersey Number</th>
@@ -10,6 +11,7 @@
 	{players}
 
 	<tr>
+		<td><img src="./playerImg/{mug}"></td>
 		<td>{firstname}</td>
 		<td>{lastname}</td>
 		<td>{number}</td>
