@@ -10,6 +10,7 @@ $config['menu_choices'] = array(
         array('name' => 'League Info', 'link' => '/teams'),
         array('name' => 'Player Roster', 'link' => '/roster'),
         array('name' => 'About', 'link' => '/about'),
+        array('name' => 'Modify', 'link' => '/admin'),
         )
     );
 

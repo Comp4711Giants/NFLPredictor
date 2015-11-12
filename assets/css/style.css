@@ -31,3 +31,7 @@ td {
 .logo {
     width: 100px;
 }
+
+.lastPlayerEdit {
+  border: dashed;
+}

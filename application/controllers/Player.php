@@ -33,8 +33,9 @@ class Player extends Application {
         $source = $this->players->all();
         $players = array();
         foreach ($source as $record) {
-            $players[] = array('who' => $record->lastname . ", " . $record->firstname, 'mug' => $record->mug, 
-                'id' => $record->id, 'position' => $record->position, 'number' => $record->number);
+            $players[] = array('who' => $record->lastname . ", " . $record->firstname, 
+                'mug' => $record->mug, 'id' => $record->id, 'position' => $record->position, 
+                'number' => $record->number);
         }
         $this->data['players'] = $players;
 

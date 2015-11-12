@@ -22,22 +22,22 @@ SET time_zone = "+00:00";
 -- Table structure for table `players`
 --
 
-DROP TABLE IF EXISTS `players`;
-CREATE TABLE IF NOT EXISTS `players` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
-  `mug` varchar(256) NOT NULL,
-  `number` int(2) NOT NULL,
-  `position` varchar(2) NOT NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS 'players';
+CREATE TABLE IF NOT EXISTS 'players' (
+  'id' int NOT NULL AUTO_INCREMENT,
+  'firstname' varchar(50) NOT NULL,
+  'lastname' varchar(50) NOT NULL,
+  'mug' varchar(256) NOT NULL,
+  'number' int(2) NOT NULL,
+  'position' varchar(2) NOT NULL,
+  PRIMARY KEY ('id')
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `players`
 --
 
-INSERT INTO `players` (`firstname`, `lastname`, `mug`, `number`, `position`) VALUES
+INSERT INTO 'players' ('firstname', 'lastname', 'mug', 'number', 'position') VALUES
 ('Prince', 'Amukamara', 'amukamara.png', '20', 'CB'),
 ('Robert', 'Ayers', 'ayers.png', '91', 'DE'),
 ('Jon', 'Beason', 'beason.png', '52', 'MLB'),
@@ -70,22 +70,22 @@ INSERT INTO `players` (`firstname`, `lastname`, `mug`, `number`, `position`) VAL
 -- Table structure for table `teams`
 --
 
-DROP TABLE IF EXISTS `teams`;
-CREATE TABLE IF NOT EXISTS `teams` (
-  `id` varchar(3) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `conference` varchar(3) NOT NULL,
-  `division` varchar(50) NOT NULL,
-  `logo` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS 'teams';
+CREATE TABLE IF NOT EXISTS 'teams' (
+  'id' varchar(3) NOT NULL,
+  'name' varchar(50) NOT NULL,
+  'city' varchar(50) NOT NULL,
+  'conference' varchar(3) NOT NULL,
+  'division' varchar(50) NOT NULL,
+  'logo' varchar(50) NOT NULL,
+  PRIMARY KEY ('id')
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `teams`
 --
 
-INSERT INTO `teams` (`id`, `name`, `city`, `conference`, `division`, `logo`) VALUES
+INSERT INTO 'teams' ('id', 'name', 'city', 'conference', 'division', 'logo') VALUES
 ('DAL', 'Cowboys', 'Dallas', 'NFC', 'East', 'dal.png'),
 ('NYG', 'Giants', 'New York', 'NFC', 'East', 'nyg.png'),
 ('WAS', 'Redskins', 'Washington', 'NFC', 'East', 'was.png'),
