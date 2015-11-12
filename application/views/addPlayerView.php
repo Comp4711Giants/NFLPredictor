@@ -15,7 +15,6 @@
 
 	</form>
 
+	<a href="/admin">Return to Edit Players</a><br>
+
 </div>
-
-
-<a href = '/admin/edit'>Switch to Edit Player</a>

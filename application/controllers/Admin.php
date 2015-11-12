@@ -16,67 +16,83 @@ class Admin extends Application {
 
 	function index() {
 
-		//unset($_SESSION['editOrAdd']);
+		unset($_SESSION['editMode']);
 
-		if (isset($_SESSION['editOrAdd'])) {
+		//get session 'editMode' variable if any
+		$modeSelected = $this->session->editMode;
 
-			$modeSelected = $this->session->editOrAdd;
-
-			switch ($modeSelected) {
-				case 'edit':
-					$this->data['pagebody'] = 'editPlayerView';
-					$this->data['title'] = 'Edit Existing Players';
-					$this->data['players'] = $this->players->all();
-					break;
-				case 'add':
-					redirect('admin/add');
-					$this->data['title'] = 'Add New Player';
-					break;
-				default:
-					$this->data['title'] = 'Error unable to process request';
-					break;
-			}
-		} else {
-
-			$this->data['pagebody'] = 'editPlayerView';
-			$this->data['title'] = 'Edit Existing Players';
-			$this->data['players'] = $this->players->all();
-			$addMode = array( 'editOrAdd' => 'edit');
-			$this->session->set_userdata($addMode);
-
-
+		//check which mode is set in session 'editMode' param
+		switch ($modeSelected) {
+			case 'edit':
+				//refresh session
+				$addMode = array( 'editMode' => 'edit');
+				$this->session->set_userdata($addMode);
+				$this->data['pagebody'] = 'editPlayerView';
+				$this->data['title'] = 'Edit Player Roster';
+				$this->data['players'] = $this->players->all();
+				break;
+			default:
+				//if no session set (will change when modes) redirect to home
+				$this->data['pagebody'] = 'editPlayerView';
+				$this->data['title'] = 'Edit Existing Players';
+				$this->data['players'] = $this->players->all();
+				$this->data['btn_add'] = makeSubmitButton('Add New Player', 
+					'btn-primary');
+				//set session to edit mode
+				$addMode = array( 'editMode' => 'edit');
+				$this->session->set_userdata($addMode);					
+				break;
 		}
-
-		// $this->data['pagebody'] = 'editPlayerView';
-
-		// $this->data['players'] = $this->players->all();
 		
 		$this->render();
 	}
 
 	function add() {
-
-		$addMode = array( 'editOrAdd' => 'add');
+		//refresh session
+		$addMode = array( 'editMode' => 'edit');
 		$this->session->set_userdata($addMode);
 
 		$player = $this->players->create();
 		$this->present($player);
 	}
 
-	function edit() {
+	function edit($player) {
 
-		$addMode = array( 'editOrAdd' => 'edit');
-		$this->session->set_userdata($addMode);
+		//find player with id passed from view
+		$playerObject = $this->players->some('id', $player);
 
-		redirect('/admin');
 	}
 
+	function delete($player) {
+		//find player with id passed from view
+		$playerObject = $this->players->some('id', $player);
+		
+		$toDelete = array();
+		//get parameters for deletion confirmation page
+		foreach ($playerObject as $deletedPlayer) {
+			$result = array (
+				'fname' => $deletedPlayer->firstname,
+				'lname' => $deletedPlayer->lastname
+			);
+			$toDelete[] = $result;
+		}
+		$this->data['players'] = $toDelete;
+		$this->data['title'] = "Deletion Confirmation";
+		$this->data['pagebody'] = 'deletePlayerView';
+		$this->render();
+		//actual deletion after rendering page (otherwise no data)
+		$this->players->delete($player);
+	}
+
+	/*
+	* Creates a form to add players to the team roster. 
+	*/
 	function present($player) {
 		$message = '';
 		//TODO pass validation errors
 		$this->data['message'] = $message;
 
-
+		//make ID read-only (auto-incremented in db)
 		$this->data['fid'] = makeTextField('ID#', 'id', 
 			$player->id, "Unique, system-assigned", 10, 10, true);
 		$this->data['ffirstname'] = makeTextField('First Name', 
@@ -88,11 +104,12 @@ class Admin extends Application {
 		$this->data['fposition'] = makeTextField('Player Position', 
 			'position', $player->position);
 
-		
+		//submit button using formfields helper
 		$this->data['fsubmit'] = makeSubmitButton('Process Player', 
 			'btn-success');
 
 		$this->data['pagebody'] = 'addPlayerView';
+		$this->data['title'] = "Add New Player";
 		$this->render();
 	}
 
@@ -116,4 +133,5 @@ class Admin extends Application {
 
 		redirect('/admin/add');
 	}
+
 }
