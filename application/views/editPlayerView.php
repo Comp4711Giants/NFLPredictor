@@ -11,7 +11,7 @@
 	{players}
 
 	<tr>
-		<td><img src="./playerImg/{mug}"></td>
+		<td><img src="./data/mugs/{mug}"></td>
 		<td>{firstname}</td>
 		<td>{lastname}</td>
 		<td>{number}</td>
