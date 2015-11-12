@@ -28,14 +28,32 @@ class Player extends Application {
     //-------------------------------------------------------------
 
     function index() {
-        $this->data['pagebody'] = 'playersView';    // this is the view we want shown
+
+        //$this->session->sess_destroy();
+
+        $this->data['pagebody'] = 'playersView';    
+        // this is the view we want shown
         // build the list of players, to pass on to our view
         $source = $this->players->all();
+
+        //get value of session->userdata('editMode')
+        $session_editMode = $this->session->editMode;
+        //if emtpy, hide edit button in playersView
+        if(empty($session_editMode)) {
+            $this->data['editEnabled'] = "none";
+        } else {
+             $this->data['editEnabled'] = "true";
+        }
+
         $players = array();
         foreach ($source as $record) {
-            $players[] = array('who' => $record->lastname . ", " . $record->firstname, 
-                'mug' => $record->mug, 'id' => $record->id, 'position' => $record->position, 
-                'number' => $record->number);
+            $players[] = array(
+                'who' => $record->lastname . ", " . $record->firstname, 
+                'mug' => $record->mug, 
+                'id' => $record->id, 
+                'position' => $record->position, 
+                'number' => $record->number
+            );
         }
         $this->data['players'] = $players;
 
@@ -46,8 +64,14 @@ class Player extends Application {
         $this->data['pagebody'] = 'singlePlayerView';    // this is the view we want shown
         $record = $this->players->get($number);
         
-        $player = array('id' => $record->id, 'who' => $record->lastname . ", " . $record->firstname, 'mug' => $record->mug,
-            'number' => $record->number, 'position' => $record->position);
+        $player = array(
+            'id' => $record->id, 
+            'who' => $record->lastname . ", " . $record->firstname, 
+            'mug' => $record->mug,
+            'number' => $record->number, 
+            'position' => $record->position
+        );
+
         $this->data = array_merge($this->data, $player);
         $this->render();
     }
