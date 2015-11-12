@@ -55,12 +55,33 @@ class Admin extends Application {
 		$this->present($player);
 	}
 
-	function edit() {
+	function edit($player) {
 		//set session 'editOrAdd' to edit
 		$addMode = array( 'editOrAdd' => 'edit');
 		$this->session->set_userdata($addMode);
 
 		redirect('/admin');
+	}
+
+	function delete($player) {
+		//find player with id passed from view
+		$playerObject = $this->players->some('id', $player);
+		
+		$toDelete = array();
+		//get parameters for deletion confirmation page
+		foreach ($playerObject as $deletedPlayer) {
+			$result = array (
+				'fname' => $deletedPlayer->firstname,
+				'lname' => $deletedPlayer->lastname
+			);
+			$toDelete[] = $result;
+		}
+		$this->data['players'] = $toDelete;
+		$this->data['title'] = "Deletion Confirmation";
+		$this->data['pagebody'] = 'deletePlayerView';
+		$this->render();
+		//actual deletion after rendering page (otherwise no data)
+		$this->players->delete($player);
 	}
 
 	/*
