@@ -1,3 +1,7 @@
+
+<a href="/admin" class="btn btn-primary" style="display:{editEnabled};" >Modify Players</a>
+<br><br>
+
 <div class="row">
     {players}
     <div class="span4">
