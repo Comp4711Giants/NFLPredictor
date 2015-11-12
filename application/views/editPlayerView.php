@@ -1,3 +1,7 @@
+
+<a href="/admin/add" class="btn btn-primary">Add a New Player</a>
+<br><br>
+
 <table cols="" border="0">
 	<tr>
 		<th>Photo</th>
@@ -25,7 +29,3 @@
 	{/players}
 
 </table>
-
-
-
-<a href = './admin/add'>Switch to Add Player</a>

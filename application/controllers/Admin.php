@@ -16,29 +16,30 @@ class Admin extends Application {
 
 	function index() {
 
-		//unset($_SESSION['editOrAdd']);
+		unset($_SESSION['editMode']);
 
-		//get session 'editOrAdd' variable if any
-		$modeSelected = $this->session->editOrAdd;
+		//get session 'editMode' variable if any
+		$modeSelected = $this->session->editMode;
 
-		//check which mode is set in session 'editOrAdd' param
+		//check which mode is set in session 'editMode' param
 		switch ($modeSelected) {
 			case 'edit':
+				//refresh session
+				$addMode = array( 'editMode' => 'edit');
+				$this->session->set_userdata($addMode);
 				$this->data['pagebody'] = 'editPlayerView';
 				$this->data['title'] = 'Edit Player Roster';
 				$this->data['players'] = $this->players->all();
 				break;
-			case 'add':
-				redirect('admin/add');
-				$this->data['title'] = 'Add New Player';
-				break;
 			default:
-				//if no session set
+				//if no session set (will change when modes) redirect to home
 				$this->data['pagebody'] = 'editPlayerView';
 				$this->data['title'] = 'Edit Existing Players';
 				$this->data['players'] = $this->players->all();
+				$this->data['btn_add'] = makeSubmitButton('Add New Player', 
+					'btn-primary');
 				//set session to edit mode
-				$addMode = array( 'editOrAdd' => 'edit');
+				$addMode = array( 'editMode' => 'edit');
 				$this->session->set_userdata($addMode);					
 				break;
 		}
@@ -47,8 +48,8 @@ class Admin extends Application {
 	}
 
 	function add() {
-		//set session 'editOrAdd' to add
-		$addMode = array( 'editOrAdd' => 'add');
+		//refresh session
+		$addMode = array( 'editMode' => 'edit');
 		$this->session->set_userdata($addMode);
 
 		$player = $this->players->create();
@@ -56,11 +57,10 @@ class Admin extends Application {
 	}
 
 	function edit($player) {
-		//set session 'editOrAdd' to edit
-		$addMode = array( 'editOrAdd' => 'edit');
-		$this->session->set_userdata($addMode);
 
-		redirect('/admin');
+		//find player with id passed from view
+		$playerObject = $this->players->some('id', $player);
+
 	}
 
 	function delete($player) {
@@ -133,4 +133,5 @@ class Admin extends Application {
 
 		redirect('/admin/add');
 	}
+
 }
