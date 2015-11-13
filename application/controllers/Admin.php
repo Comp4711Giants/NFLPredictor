@@ -161,6 +161,7 @@ class Admin extends Application {
 		$record->mug = $this->input->post('mug');
 
 		//TODO: ADD VALIDATION
+                
 
 		//$idCheck = $record->id;
 

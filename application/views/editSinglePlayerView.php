@@ -9,6 +9,7 @@
 		{enumber}
 		{eposition}
 		{emug}
+                
                 <label for="userfile">Photo</label>
                 <input type="file" name="userfile" id="userfile" size="20" />
 
