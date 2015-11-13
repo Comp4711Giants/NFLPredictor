@@ -90,7 +90,7 @@ class Admin extends Application {
 		$this->data['emug'] = makeTextField('Photo', 'mug', $mug);
 
 		//submit button using formfields helper
-		$this->data['esubmit'] = makeSubmitButton('Submit Changes', 
+		$this->data['esubmit'] = makeSubmitButton('Submit Changes', 'title', 
 			'btn-success');
 
 		$this->data['title'] = "Edit A Player";
@@ -141,7 +141,7 @@ class Admin extends Application {
 			'position', $player->position);
 
 		//submit button using formfields helper
-		$this->data['fsubmit'] = makeSubmitButton('Process Player', 
+		$this->data['fsubmit'] = makeSubmitButton('Process Player', 'success',
 			'btn-success');
 
 		$this->data['pagebody'] = 'addPlayerView';
