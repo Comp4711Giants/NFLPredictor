@@ -15,7 +15,7 @@ class Upload extends CI_Controller {
 
 	function do_upload()
 	{
-		$config['upload_path'] = './data/mugs/';
+		$config['upload_path'] = '/data/mugs/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '100';
 		$config['max_width']  = '1024';
