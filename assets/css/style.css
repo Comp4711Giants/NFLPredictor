@@ -5,13 +5,19 @@ body {}
 .row>div {margin-bottom:10px;}
 
 table, th, td {
+   cellpadding: 10px;
    border: 1px solid black;
-   padding: 2px;
+   font-weight: bold;
+   padding: 20px;
 }
 
 th {
     color: white;
     background-color: #192D64;
+}
+
+td {
+    height: 150px;
 }
 
 .name {
@@ -20,6 +26,12 @@ th {
 }
 
 .stat {
-    width: 50px;
-    text-align: center;
+}
+
+.logo {
+    width: 100px;
+}
+
+.lastPlayerEdit {
+  border: dashed;
 }
