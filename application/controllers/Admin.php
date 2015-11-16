@@ -54,6 +54,15 @@ class Admin extends Application {
 		$this->session->set_userdata($addMode);
 		//create empty player
 		$player = $this->players->create();
+		$playerSession = array( 'playerId' => "",
+			'playerFname' => "",
+			'playerLname' => "",
+			'playerNumber' => "",
+			'playerONumber' => "",
+			'playerPosition' => "",
+			'playerMug' => ""
+			);
+		$this->session->set_userdata($playerSession);
 		//pass to Admin::present with empty player
 		$this->present($player);
 	}
@@ -70,26 +79,37 @@ class Admin extends Application {
 			$first = $editedPlayer->firstname;
 			$last = $editedPlayer->lastname;
 			$number = $editedPlayer->number;
-                        $onumber = $editedPlayer->number;
+            $onumber = $editedPlayer->number;
 			$position = $editedPlayer->position;
 			$mug = $editedPlayer->mug;
 		}
 
+		$playerSession = array( 
+			'playerId' => $id,
+			'playerFname' => $first,
+			'playerLname' => $last,
+			'playerNumber' => $number,
+			'playerONumber' => $onumber,
+			'playerPosition' => $position,
+			'playerMug' => $mug
+			);
+		$this->session->set_userdata($playerSession);
+		$this->data['id'] = $id;
+
 		//make ID read-only (auto-incremented in db)
 		$this->data['eid'] = makeTextField('ID#', 'id', 
-			$id, "Unique, system-assigned");
+			$this->session->playerId, "Unique, system-assigned");
 		$this->data['efirstname'] = makeTextField('First Name', 
-			'firstname', $first);
+			'firstname', $this->session->playerFname);
 		$this->data['elastname'] = makeTextField('Last Name', 
-			'lastname', $last);
+			'lastname', $this->session->playerLname);
 		$this->data['enumber'] = makeTextField('Jersey Number', 
-			'number', $number);
+			'number', $this->session->playerNumber);
 		$this->data['eposition'] = makeTextField('Player Position', 
-			'position', $position);
-                $this->data['onumber'] = makeTextField('Jersey Number', 
-			'onumber', $onumber);
+			'position', $this->session->playerPosition);
+        $this->data['onumber'] = makeTextField('Jersey Number', 
+			'onumber', $this->session->playerONumber);
 
-		//TODO: change to picture upload method
 		$this->data['emug'] = makeTextField('Photo', 'mug', $mug);
 
 		//submit button using formfields helper
@@ -100,12 +120,12 @@ class Admin extends Application {
 		$this->data['pagebody'] = 'editSinglePlayerView';
                 
                
-                $message = '';
-                if (count($this->errors) > 0) {
-                    foreach ($this->errors as $booboo)
-                      $message .= $booboo . '<br>';
-                }
-                $this->data['message'] = $message;
+        $message = '';
+        if (count($this->errors) > 0) {
+            foreach ($this->errors as $booboo)
+              $message .= $booboo . '<br>';
+        }
+        $this->data['message'] = $message;
 		$this->render();
 
 	}
@@ -113,7 +133,10 @@ class Admin extends Application {
 	function delete($player) {
 		//find player with id passed from view
 		$playerObject = $this->players->some('id', $player);
-		
+
+		$array_playerSession = array( 'playerId','playerFname','playerLname',
+		'playerNumber','playerONumber','playerPosition','playerMug' );
+				
 		$toDelete = array();
 		//get parameters for deletion confirmation page
 		foreach ($playerObject as $deletedPlayer) {
@@ -129,34 +152,34 @@ class Admin extends Application {
 		$this->render();
 		//actual deletion after rendering page (otherwise no data)
 		$this->players->delete($player);
+		$this->session->unset_userdata($array_playerSession);
+
 	}
 
 	/*
 	* Creates a form to add players to the team roster. 
 	*/
 	function present($player) {
-                $message = '';
-                if (count($this->errors) > 0) {
-                    foreach ($this->errors as $booboo)
-                      $message .= $booboo . '<br>';
-                }
-                $this->data['message'] = $message;
-                
+        $message = '';
+        if (count($this->errors) > 0) {
+            foreach ($this->errors as $booboo)
+              $message .= $booboo . '<br>';
+        }
+
+        $this->data['message'] = $message;
 		//make ID read-only (auto-incremented in db)
 		$this->data['fid'] = makeTextField('ID#', 'id', 
 			$player->id, "Unique, system-assigned", 10, 10, true);
 		$this->data['ffirstname'] = makeTextField('First Name', 
-			'firstname', $player->firstname);
+			'firstname', $this->session->playerFname);
 		$this->data['flastname'] = makeTextField('Last Name', 
-			'lastname', $player->lastname);
+			'lastname', $this->session->playerLname);
 		$this->data['fnumber'] = makeTextField('Jersey Number', 
-			'number', $player->number);
+			'number', $this->session->playerNumber);
 		$this->data['fposition'] = makeTextField('Player Position', 
 			'position', $player->position);
-                $this->data['emug'] = makeTextField('mug',
-                        'mug', $player->mug);
-
-
+        $this->data['emug'] = makeTextField('mug',
+                'mug', $this->session->playerMug);
 		//submit button using formfields helper
 		$this->data['fsubmit'] = makeSubmitButton('Process Player', 'success',
 			'btn-success');
@@ -166,117 +189,142 @@ class Admin extends Application {
 		$this->render();
 	}
      
+     //unset session data, send user back to roster
+     function cancelForm() {
+     	$array_playerSession = array( 'playerId','playerFname','playerLname',
+		'playerNumber','playerONumber','playerPosition','playerMug' );
+		$this->session->unset_userdata($array_playerSession);
+		redirect('/roster');
+     }
 
 	function confirm() {
 		$record = $this->players->create();
 
-		//get the submitted fields
-		$record->id = $this->input->post('id');
-		$record->firstname = $this->input->post('firstname');
-		$record->lastname = $this->input->post('lastname');
-		$record->position = $this->input->post('position');
-		$record->number = $this->input->post('number');
-                $onumber = $this->input->post('onumber');
-		$record->mug = $this->input->post('mug');
+		//set session data
+		$playerSession = array( 
+		'playerId' => $this->input->post('id'),
+		'playerFname' => $this->input->post('firstname'),
+		'playerLname' => $this->input->post('lastname'),
+		'playerNumber' => $this->input->post('number'),
+		'playerONumber' => $this->input->post('onumber'),
+		'playerPosition' => $this->input->post('position'),
+		'playerMug' => $this->input->post('mug')
+		);
+		$this->session->set_userdata($playerSession);
 
-		//TODO: ADD VALIDATION
-                $this->load->library("../core/security");
-                
-                $record->firstname = $this->security->xss_clean($record->firstname);
-                $record->lastname = $this->security->xss_clean($record->lastname);
-                $record->position = $this->security->xss_clean($record->position);
-                $record->number = $this->security->xss_clean($record->number);
-                
-                $this->load->library('form_validation');
+		//get the submitted fields loading form session data
+		$record->id = $this->session->playerId;
+		$record->firstname = $this->session->playerFname;
+		$record->lastname = $this->session->playerLname;
+		$record->position = $this->session->playerPosition;
+		$record->number = $this->session->playerNumber;
+        $onumber = $this->session->playerONumber;
+		$record->mug = $this->session->playerMug;
 
-                $this->form_validation->set_rules('firstname', 'firstname', 'trim|required');
-                $this->form_validation->set_rules('lastname', 'lastname', 'trim|required');
-               
-                if (strcmp($record->number, $onumber) == 0) {
-                        $this->form_validation->set_rules('number', 'number', 'trim|required');
-                } else {
-                        $this->form_validation->set_rules('number', 'number', 'trim|required|is_unique[players.number]');
-                }
-                
-                $this->form_validation->set_rules('position', 'position', 'trim|required');
+        $this->load->library("../core/security");
+        
+        $record->firstname = $this->security->xss_clean($record->firstname);
+        $record->lastname = $this->security->xss_clean($record->lastname);
+        $record->position = $this->security->xss_clean($record->position);
+        $record->number = $this->security->xss_clean($record->number);
+        
+        $this->load->library('form_validation');
 
-                $match = false;
-                
-                $pos = array("QB", "CB", "LB", "C", "G", "T", "RB", "WR", "TE",
-                    "DT", "DE", "MLB", "OLB", "S", "K", "H", "LS", "P", "KOS",
-                    "PR", "KR");
+        $this->form_validation->set_rules('firstname', 'firstname', 'trim|required');
+        $this->form_validation->set_rules('lastname', 'lastname', 'trim|required');
+       
+        if (strcmp($record->number, $onumber) == 0) {
+            $this->form_validation->set_rules('number', 'number', 'trim|required');
+        } else {
+            $this->form_validation->set_rules('number', 'number', 'trim|required|is_unique[players.number]');
+        }
+        
+        $this->form_validation->set_rules('position', 'position', 'trim|required');
+
+        $match = false;
+        
+        $pos = array("QB", "CB", "LB", "C", "G", "T", "RB", "WR", "TE",
+            "DT", "DE", "MLB", "OLB", "S", "K", "H", "LS", "P", "KOS",
+            "PR", "KR");
 		foreach ($pos as $playPos) {
-                    if (strcmp($record->position, $playPos) == 0)
-                        $match = true;
-                }
+            if (strcmp($record->position, $playPos) == 0)
+                $match = true;
+        }
 
 		//$idCheck = $record->id;
-                $config['upload_path'] = './data/mugs/';
+        $config['upload_path'] = './data/mugs/';
 		$config['allowed_types'] = '*';
 		$config['max_size']	= '1000';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
                 
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
-                
-                if (!$this->upload->do_upload()) { 
-                    // Our upload failed, but before we throw an error, learn why
-                    if ("You did not select a file to upload." != $this->upload->display_errors('','')) {
-                        // in here we know they DID provide a file
-                        // but it failed upload, display error
-                        $this->errors[] = $this->upload->display_errors();
-                        $this->data['pagebody'] = 'editSinglePlayerView';
-                        //$this->edit($record->id);
-                        if(empty($record->id)) {
-                            $this->present($record);
-                        } else {
-                            $this->edit($record->id);
-                        }
-                    }
-                    else {
-                        // here we failed b/c they did not provide a file to upload
-                        // fail silently, or message user, up to you
-                    }
-                }
-                else {
-                    // in here is where things went according to plan. 
-                    //file is uploaded, people are happy
-                    $data = array('upload_data' => $this->upload->data());
-                    $record->mug = $this->upload->file_name;
-                }
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        
+        $array_playerSession = array( 'playerId','playerFname','playerLname',
+		'playerNumber','playerONumber','playerPosition','playerMug' );
+		
 
-                
-                if ($this->form_validation->run() == FALSE)
+        if (!$this->upload->do_upload()) { 
+            // Our upload failed, but before we throw an error, learn why
+            if ("You did not select a file to upload." != $this->upload->display_errors('','')) {
+                // in here we know they DID provide a file
+                // but it failed upload, display error
+                $this->errors[] = $this->upload->display_errors();
+                $this->data['pagebody'] = 'editSinglePlayerView';
+                //$this->edit($record->id);
+                if(empty($record->id)) {
+                    $this->present($record);
+                } else {
+                    $this->edit($record->id);
+                }
+            }
+            else {
+                // here we failed b/c they did not provide a file to upload
+                // fail silently, or message user, up to you
+            }
+        }
+        else {
+            // in here is where things went according to plan. 
+            //file is uploaded, people are happy
+            $data = array('upload_data' => $this->upload->data());
+            $record->mug = $this->upload->file_name;
+        }
+
+        
+        if ($this->form_validation->run() == FALSE)
 		{
-                    $this->errors[] = validation_errors();
-                    $this->data['pagebody'] = 'editSinglePlayerView';
-                    if(empty($record->id)) {
+            $this->errors[] = validation_errors();
+            $this->data['pagebody'] = 'editSinglePlayerView';
+            if(empty($record->id)) {
 			$this->present($record);
-                    } else {
-                        $this->edit($record->id);
-                    }
+            } else {
+                $this->edit($record->id);
+            }
 		}
-                else if ($match == false)
+            else if ($match == false)
 		{
-                    $this->errors[] = "Position is invalid";
-                    $this->data['pagebody'] = 'editSinglePlayerView';
-                    if(empty($record->id)) {
-			$this->present($record);
-                    } else {
-			$this->players->update($record);
-			redirect('/admin');
-                    }
+            $this->errors[] = "Position is invalid";
+            $this->data['pagebody'] = 'editSinglePlayerView';
+            if(empty($record->id)) {
+				$this->present($record);
+            } else {
+				$this->players->update($record);
+				redirect('/roster');
+				$this->session->unset_userdata($array_playerSession);
+            }
 		}
 		else
 		{
-                    if(empty($record->id)) {
-			$this->players->add($record);
-			redirect('/admin');
-                    } else {
-			$this->players->update($record);
-			redirect('/admin');
-                    }
+            if(empty($record->id)) {
+				$this->players->add($record);
+				$this->session->unset_userdata($array_playerSession);
+				redirect('/roster');
+            } else {
+				$this->players->update($record);
+				$this->session->unset_userdata($array_playerSession);
+				redirect('/roster');
+            }
 		}
 	}
 

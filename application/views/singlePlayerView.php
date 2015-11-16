@@ -5,5 +5,7 @@
         <p>Number: {number}</p></br>
         <p>Position: {position}</p></br>
         <!-- <p class="text-right"></p> -->
+        <a href="/admin/edit/{id}" class="btn btn-primary" style="display:{editEnabled};">Edit this player</a>
+        <br><br><a href="/roster">Return to Roster</a>
     </div>
 </div>
