@@ -78,18 +78,23 @@ class Player extends Application {
         $this->render();
     }
 
+    //this function is used to display the players page by page
     function display_page($page_number = 1) {
+        //this gets the posted 'type' variable and sets it to a session variable
         if ($this->input->post('Type') != null) {
             $sessionType = array( 'type' => $this->input->post('Type'));
             $this->session->set_userdata($sessionType);
         }
 
+        //this gets the posted 'sort' variable and sets it to a session variable
         if ($this->input->post('Sort') != null) {
             $sessionSort = array( 'sort' => $this->input->post('Sort'));
             $this->session->set_userdata($sessionSort);
         }
 
-        $config['base_url'] = 'http://comp4711.local:8080/roster';
+        //this block sets config variables for the pagination library
+        //you can look these up in the pagination documentation
+        $config['base_url'] = '/roster';
         $config['total_rows'] = $this->players->size();
         $config["per_page"] = 12;
         $config['use_page_numbers'] = TRUE;
@@ -111,10 +116,10 @@ class Player extends Application {
 
         $this->pagination->initialize($config);
          
-        // this is the view we want shown
         // build the list of players, to pass on to our view
         $source = $this->players->fetch_page(12, $page_number, $this->session->sort);
 
+        //assigns the player data from the database to template variables/placeholders
         $players = array();
         foreach ($source as $record) {
             $players[] = array(
@@ -127,8 +132,11 @@ class Player extends Application {
         }
         $this->data['players'] = $players;
         
+        //creates the pagination links
         $this->data['links'] = $this->pagination->create_links();
 
+        //creating the 'sort' radio buttons
+        //sets the default selected 'type' option based on the session variable
         if ($this->session->type == 'Table') {
             $this->data['pagebody'] = 'playersPageViewTable';
             $this->data['radGallery'] = form_radio($this->get_radio_button_data_array('Type', 'Gallery'));
@@ -139,6 +147,8 @@ class Player extends Application {
             $this->data['radTable'] = form_radio($this->get_radio_button_data_array('Type', 'Table'));
         }
 
+        //creating the 'type' radio buttons
+        //sets the default selected 'sort' option based on the session variable
         if ($this->session->sort == 'position') {
             $this->data['radName'] = form_radio($this->get_radio_button_data_array('Sort', 'lastname'));
             $this->data['radJersey'] = form_radio($this->get_radio_button_data_array('Sort', 'number'));
@@ -153,6 +163,7 @@ class Player extends Application {
             $this->data['radPosition'] = form_radio($this->get_radio_button_data_array('Sort', 'position'));
         }
         
+        //creating the labels for the radio buttons
         $this->data['lblGallery'] = form_label('Gallery', 'Gallery');
         $this->data['lblTable'] = form_label('Table', 'Table');
         $this->data['lblName'] = form_label('Name', 'lastname');
@@ -162,6 +173,7 @@ class Player extends Application {
         $this->data['lblSort'] = form_label('Sort By');
         $this->data['btnSubmit'] = form_submit('Submit', 'Submit');
 
+        //storing the page number in a placeholder/template variable
         $this->data['page_number'] = $page_number;
 
         $this->render();
