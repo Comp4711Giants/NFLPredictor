@@ -89,8 +89,6 @@ class Player extends Application {
         } else {
              $this->data['editEnabled'] = "true";
         }
-
-        
         $player = array(
             'id' => $record->id, 
             'who' => $record->lastname . ", " . $record->firstname, 
