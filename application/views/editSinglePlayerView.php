@@ -13,7 +13,6 @@
                 {onumber}
                 </div>
                 {eposition}
-                </div>
                 <div style='display: none;'>
 		{emug}
                 </div>
