@@ -38,6 +38,7 @@ td {
 
 #sort-setting-table {
   border-style: none;
+  width: 100%;
 }
 
 .no-height {
@@ -46,11 +47,22 @@ td {
 }
 
 .edit-players-cell {
-  width: 21.5%;
+  width: 22%;
+  padding-right: 0;
+}
+
+.first.no-height {
+  padding-left: 0;
 }
 
 .table-page-table {
   width: 100%;
+}
+
 .hiddenValue {
-    display: none !important;
+    display: none;
+}
+
+.btn {
+  font-weight: normal;
 }

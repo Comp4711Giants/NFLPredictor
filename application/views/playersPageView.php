@@ -11,7 +11,7 @@
 	<input type="submit" class="btn btn-primary" value="Submit"></input>
 </td>
 <td class="no-height edit-players-cell" align="right">
-	<a href="/admin" class="btn btn-primary" style="font-weight: normal; display:{editEnabled};">Edit Players</a>
+	<a href="/Player/editSessionSet" class="btn btn-primary" style="font-weight: normal; display:{editEnabled};">Edit Players</a>
 </td>
 </tr>
 </table>

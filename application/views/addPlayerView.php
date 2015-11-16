@@ -8,12 +8,13 @@
 		{flastname}
 		{fnumber}
 		{fposition}
-                <div style='display: none;'>
-		{emug}
-                </div>
+        <div class="hiddenValue">
+			{emug}
+        </div>
 		<input type="file" name="userfile" size="20" />
 
 		{fsubmit}
+		<a href="/admin/cancelForm" class="btn btn-primary">Cancel</a>
 
 	</form>
 
