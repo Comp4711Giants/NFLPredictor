@@ -5,13 +5,19 @@ body {}
 .row>div {margin-bottom:10px;}
 
 table, th, td {
+   cellpadding: 10px;
    border: 1px solid black;
-   padding: 2px;
+   font-weight: bold;
+   padding: 20px;
 }
 
 th {
     color: white;
     background-color: #192D64;
+}
+
+td {
+    height: 150px;
 }
 
 .name {
@@ -20,6 +26,43 @@ th {
 }
 
 .stat {
-    width: 50px;
-    text-align: center;
+}
+
+.logo {
+    width: 100px;
+}
+
+.lastPlayerEdit {
+  border: dashed;
+}
+
+#sort-setting-table {
+  border-style: none;
+  width: 100%;
+}
+
+.no-height {
+  height: 10px;
+  border-style: none;
+}
+
+.edit-players-cell {
+  width: 22%;
+  padding-right: 0;
+}
+
+.first.no-height {
+  padding-left: 0;
+}
+
+.table-page-table {
+  width: 100%;
+}
+
+.hiddenValue {
+    display: none;
+}
+
+.btn {
+  font-weight: normal;
 }
