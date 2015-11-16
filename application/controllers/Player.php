@@ -12,6 +12,7 @@ class Player extends Application {
     function __construct() {
         parent::__construct();
         $this->load->library('pagination');
+        $this->load->helper('form');
     }
 
     //-------------------------------------------------------------
@@ -78,13 +79,23 @@ class Player extends Application {
     }
 
     function display_page($page_number = 1) {
-        $config['base_url'] = 'http://comp4711.local:8080/roster/page';
-        $config['total_rows'] = ceil($this->players->size() / 12);
-        $config["per_page"] = 1;
+        if ($this->input->post('Type') != null) {
+            $sessionType = array( 'type' => $this->input->post('Type'));
+            $this->session->set_userdata($sessionType);
+        }
+
+        if ($this->input->post('Sort') != null) {
+            $sessionSort = array( 'sort' => $this->input->post('Sort'));
+            $this->session->set_userdata($sessionSort);
+        }
+
+        $config['base_url'] = 'http://comp4711.local:8080/roster';
+        $config['total_rows'] = $this->players->size();
+        $config["per_page"] = 12;
         $config['use_page_numbers'] = TRUE;
-        $config['first_link'] = 'First ';
-        $config['prev_link'] = 'Previous ';
-        $config['next_link'] = 'Next ';
+        $config['first_link'] = 'First';
+        $config['prev_link'] = 'Previous';
+        $config['next_link'] = 'Next';
         $config['last_link'] = 'Last';
         $config['display_pages'] = FALSE;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -99,21 +110,10 @@ class Player extends Application {
         $config['prev_tag_close'] = '</li>';
 
         $this->pagination->initialize($config);
-
-        if (isset($this->data['grid'])) {
-            if ($this->data['grid']) {
-                $this->data['pagebody'] = 'playersPageView';
-            } else {
-                $this->data['pagebody'] = 'playersPageViewTable';
-            }
-        } else {
-            $this->data['pagebody'] = 'playersPageView';
-        }
-        
          
         // this is the view we want shown
         // build the list of players, to pass on to our view
-        $source = $this->players->fetch_page(12, $page_number);
+        $source = $this->players->fetch_page(12, $page_number, $this->session->sort);
 
         $players = array();
         foreach ($source as $record) {
@@ -126,19 +126,53 @@ class Player extends Application {
             );
         }
         $this->data['players'] = $players;
-
+        
         $this->data['links'] = $this->pagination->create_links();
+
+        if ($this->session->type == 'Table') {
+            $this->data['pagebody'] = 'playersPageViewTable';
+            $this->data['radGallery'] = form_radio($this->get_radio_button_data_array('Type', 'Gallery'));
+            $this->data['radTable'] = form_radio($this->get_radio_button_data_array('Type', 'Table', TRUE));
+        } else {
+            $this->data['pagebody'] = 'playersPageView';
+            $this->data['radGallery'] = form_radio($this->get_radio_button_data_array('Type', 'Gallery', TRUE));
+            $this->data['radTable'] = form_radio($this->get_radio_button_data_array('Type', 'Table'));
+        }
+
+        if ($this->session->sort == 'position') {
+            $this->data['radName'] = form_radio($this->get_radio_button_data_array('Sort', 'lastname'));
+            $this->data['radJersey'] = form_radio($this->get_radio_button_data_array('Sort', 'number'));
+            $this->data['radPosition'] = form_radio($this->get_radio_button_data_array('Sort', 'position', TRUE));
+        } else if ($this->session->sort == 'number') {
+            $this->data['radName'] = form_radio($this->get_radio_button_data_array('Sort', 'lastname'));
+            $this->data['radJersey'] = form_radio($this->get_radio_button_data_array('Sort', 'number', TRUE));
+            $this->data['radPosition'] = form_radio($this->get_radio_button_data_array('Sort', 'position'));
+        } else {
+            $this->data['radName'] = form_radio($this->get_radio_button_data_array('Sort', 'lastname', TRUE));
+            $this->data['radJersey'] = form_radio($this->get_radio_button_data_array('Sort', 'number'));
+            $this->data['radPosition'] = form_radio($this->get_radio_button_data_array('Sort', 'position'));
+        }
+        
+        $this->data['lblGallery'] = form_label('Gallery', 'Gallery');
+        $this->data['lblTable'] = form_label('Table', 'Table');
+        $this->data['lblName'] = form_label('Name', 'Name');
+        $this->data['lblJersey'] = form_label('Jersey', 'Jersey');
+        $this->data['lblPosition'] = form_label('Position', 'Position');
+        $this->data['lblType'] = form_label('Display Type');
+        $this->data['lblSort'] = form_label('Sort By');
+        $this->data['btnSubmit'] = form_submit('Submit', 'Submit');
+
+        $this->data['page_number'] = $page_number;
 
         $this->render();
     }
 
-    function toggle_grid_table() {
-        if (isset($this->data['grid'])) {
-            $this->data['grid'] = !$this->data['grid'];
-        } else {
-            $this->data['grid'] = true;
-        }
-
-        $this->render();
+    function get_radio_button_data_array($name, $value, $checked = FALSE) {
+        return $data = array(
+            'name'        => $name,
+            'value'       => $value,
+            'id'          => $value,
+            'checked'     => $checked,
+        );
     }
 }

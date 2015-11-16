@@ -1,5 +1,23 @@
+<form class="form-inline" action="/roster/{page_number}" method="post">
+<table id="sort-setting-table">
+<tr class="no-height">
+<td class="no-height">
+	{lblType} | {lblGallery} {radGallery} | {lblTable} {radTable}
+</td>
+<td class="no-height">
+	{lblSort} | {lblName} {radName} | {lblJersey} {radJersey} | {lblPosition} {radPosition}
+</td>
+<td class="no-height">
+	<input type="submit" class="btn btn-primary" value="Submit"></input>
+</td>
+<td class="no-height edit-players-cell" align="right">
+	<a href="/admin" class="btn btn-primary" style="font-weight: normal; display:{editEnabled};">Edit Players</a>
+</td>
+</tr>
+</table>
+</form>
+
 <div class="row">
-    <div><button type="button" class="btn">Hey</button></div>
     {players}
     <div class="span4">
         <img src="/data/mugs/{mug}" title="{who}"/></br>
@@ -7,5 +25,5 @@
         <p>#{number}, {position}</p>
     </div>
     {/players}
-    {links}
 </div>
+{links}
