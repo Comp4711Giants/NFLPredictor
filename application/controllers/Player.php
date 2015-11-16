@@ -155,9 +155,9 @@ class Player extends Application {
         
         $this->data['lblGallery'] = form_label('Gallery', 'Gallery');
         $this->data['lblTable'] = form_label('Table', 'Table');
-        $this->data['lblName'] = form_label('Name', 'Name');
-        $this->data['lblJersey'] = form_label('Jersey', 'Jersey');
-        $this->data['lblPosition'] = form_label('Position', 'Position');
+        $this->data['lblName'] = form_label('Name', 'lastname');
+        $this->data['lblJersey'] = form_label('Jersey Number', 'number');
+        $this->data['lblPosition'] = form_label('Position', 'position');
         $this->data['lblType'] = form_label('Display Type');
         $this->data['lblSort'] = form_label('Sort By');
         $this->data['btnSubmit'] = form_submit('Submit', 'Submit');
