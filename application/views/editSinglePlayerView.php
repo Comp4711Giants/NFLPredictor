@@ -11,6 +11,7 @@
 		{enumber}
                 <div style='display: none;'>
                 {onumber}
+                </div>
                 {eposition}
                 </div>
                 <div style='display: none;'>
