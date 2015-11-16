@@ -1,19 +1,26 @@
 <div class="row">	
 
 	<div class="errors">{message}</div>
-	<form action="/admin/confirm" method="post">
+	<form accept-charset="utf-8" action="/admin/confirm" method="post" enctype="multipart/form-data">
 
-		{eid}
+                <div style='display: none;'>
+                {eid}
+                </div>
 		{efirstname}
 		{elastname}
 		{enumber}
-		{eposition}
+                <div style='display: none;'>
+                {onumber}
+                {eposition}
+                </div>
+                <div style='display: none;'>
 		{emug}
-                
-                <label for="userfile">Photo</label>
-                <input type="file" name="userfile" id="userfile" size="20" />
+                </div>
 
 		<!-- TODO: ADD PLAYER PHOTO UPLOAD -->
+                
+
+            <input type="file" name="userfile" size="20" />
 
 		{esubmit}
 

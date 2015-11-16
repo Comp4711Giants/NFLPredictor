@@ -1,15 +1,17 @@
 <div class="row">	
 
 	<div class="errors">{message}</div>
-	<form action="/admin/confirm" method="post">
+	<form accept-charset="utf-8" action="/admin/confirm" method="post" enctype="multipart/form-data">
 
 		{fid}
 		{ffirstname}
 		{flastname}
 		{fnumber}
 		{fposition}
-
-		<!-- TODO: ADD PLAYER PHOTO UPLOAD -->
+                <div style='display: none;'>
+		{emug}
+                </div>
+		<input type="file" name="userfile" size="20" />
 
 		{fsubmit}
 

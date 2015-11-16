@@ -21,7 +21,9 @@
 		<td>{number}</td>
 		<td>{position}</td>
 		<td><a href = '/admin/edit/{id}'>Edit</a><br>
-			<a href = '/admin/delete/{id}'>Delete</a>
+                    <a href = '/admin/delete/{id}'>Delete</a>
+                    
+                    
 		</td>
 	</tr>
 	<tr></tr>
