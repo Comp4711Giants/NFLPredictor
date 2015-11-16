@@ -4,25 +4,24 @@
 	<form accept-charset="utf-8" action="/admin/confirm" method="post" enctype="multipart/form-data">
 
                 <div style='display: none;'>
-                {eid}
+                	{eid}
                 </div>
-		{efirstname}
-		{elastname}
-		{enumber}
-                <div style='display: none;'>
-                {onumber}
+				{efirstname}
+				{elastname}
+				{enumber}
+                <div class="hiddenValue">
+                	{onumber}
                 </div>
                 {eposition}
-                <div style='display: none;'>
-		{emug}
+                <div class="hiddenValue">
+					{emug}
                 </div>
 
-		<!-- TODO: ADD PLAYER PHOTO UPLOAD -->
-                
 
             <input type="file" name="userfile" size="20" />
 
 		{esubmit}
+        <a href="/admin/edit/{id}" class="btn btn-primary">Cancel</a>
 
 	</form>
 

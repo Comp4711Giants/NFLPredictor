@@ -31,8 +31,6 @@ class Player extends Application {
 
     function index() {
 
-        //$this->session->sess_destroy();
-
         $this->data['pagebody'] = 'playersView';    
         // this is the view we want shown
         // build the list of players, to pass on to our view
@@ -43,8 +41,10 @@ class Player extends Application {
         //if emtpy, hide edit button in playersView
         if(empty($session_editMode)) {
             $this->data['editEnabled'] = "none";
+            $this->data['hide'] = "true";
         } else {
              $this->data['editEnabled'] = "true";
+             $this->data['hide'] = "none";
         }
 
         $players = array();
@@ -61,10 +61,35 @@ class Player extends Application {
 
         $this->render();
     }
+
+    //gives editting permissions
+    function editSessionSet() {
+        $this->session->type = "Table";
+        $this->session->editMode = "edit";
+        redirect('/roster');
+    }
+
+    //removes editing permissions
+    function removeEditSessionSet() {
+        $this->session->sess_destroy();
+        $this->data['pagebody'] = 'removeEditSession';
+        $this->render();
+    }
+
+
     
     function display($number) {
         $this->data['pagebody'] = 'singlePlayerView';    // this is the view we want shown
         $record = $this->players->get($number);
+
+        //check for editting session (will hide edit button in view)
+        $session_editMode = $this->session->editMode;
+        if(empty($session_editMode)) {
+            $this->data['editEnabled'] = "none";
+        } else {
+             $this->data['editEnabled'] = "true";
+        }
+
         
         $player = array(
             'id' => $record->id, 
@@ -74,12 +99,24 @@ class Player extends Application {
             'position' => $record->position
         );
 
+        $this->data['id'] = $record->id;
         $this->data = array_merge($this->data, $player);
         $this->render();
     }
 
     //this function is used to display the players page by page
     function display_page($page_number = 1) {
+
+        $this->data['title'] = "Player Roster";
+
+        if(empty($session_editMode)) {
+            $this->data['editEnabled'] = "true";
+            $this->data['hide'] = "none";
+        } else {
+             $this->data['editEnabled'] = "none";
+             $this->data['hide'] = "true";
+        }
+
         //this gets the posted 'type' variable and sets it to a session variable
         if ($this->input->post('Type') != null) {
             $sessionType = array( 'type' => $this->input->post('Type'));
