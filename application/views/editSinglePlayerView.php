@@ -25,6 +25,6 @@
 
 	</form>
 
-	<a href="/admin">Return to Edit Players</a><br>
+	<a href="/roster">Return to Edit Players</a><br>
 
 </div>
