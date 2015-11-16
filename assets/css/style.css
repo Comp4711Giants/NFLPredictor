@@ -51,4 +51,6 @@ td {
 
 .table-page-table {
   width: 100%;
+.hiddenValue {
+    display: none !important;
 }

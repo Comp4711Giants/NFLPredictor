@@ -1,4 +1,5 @@
 */config/development
+*/config/database.php
 */logs/log-*.php
 */logs/!index.html
 */cache/*
@@ -7,4 +8,6 @@
 /application/config/database.php
 /nbproject/private/
 /nbproject/
+/data/mugs/
+/assests/css/style.css
 /.idea/
