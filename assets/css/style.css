@@ -36,6 +36,21 @@ td {
   border: dashed;
 }
 
+#sort-setting-table {
+  border-style: none;
+}
+
+.no-height {
+  height: 10px;
+  border-style: none;
+}
+
+.edit-players-cell {
+  width: 21.5%;
+}
+
+.table-page-table {
+  width: 100%;
 .hiddenValue {
     display: none !important;
 }

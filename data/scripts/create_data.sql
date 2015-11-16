@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
-  `mug` varchar(256) NOT NULL,
+  `mug` varchar(256) NULL,
   `number` int(2) NOT NULL,
   `position` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
