@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `lastname` varchar(50) NOT NULL,
   `mug` varchar(256),
   `number` int(2) NOT NULL,
-  `position` varchar(2) NOT NULL,
+  `position` varchar(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

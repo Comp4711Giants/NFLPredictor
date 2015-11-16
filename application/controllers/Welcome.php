@@ -8,7 +8,6 @@ class Welcome extends Application {
 
     function index() {
         $this->data['pagebody'] = 'homepage';
-        $this->session->sess_destroy();
         $this->render();
     }
 
