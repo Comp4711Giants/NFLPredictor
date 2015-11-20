@@ -64,7 +64,7 @@ $autoload['libraries'] = array('session', 'database','parser');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url', 'formfields');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('players', 'teams');
+$autoload['model'] = array('players', 'teams', 'history');
 
 
 /* End of file autoload.php */

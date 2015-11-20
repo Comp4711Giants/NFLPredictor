@@ -70,10 +70,11 @@ if (!function_exists('makeComboField')) {
 
         $choices = array();
         foreach ($options as $val => $display) {
+            //var_dump($display);
             $row = array(
                 'val' => $val,
                 'selected' => ($val == $value) ? 'selected="true"' : '',
-                'display' => htmlentities($display)
+                'display' => htmlentities($display['name'])
             );
             $choices[] = $row;
         }

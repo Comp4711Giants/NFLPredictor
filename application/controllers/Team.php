@@ -5,6 +5,13 @@ class Team extends Application {
     function __construct() {
         parent::__construct();
     }
+    
+    function getProbabilityOfVictory() {
+        $opponent = "WAS";
+        $result = $this->history->getProbabilityOfVictory($opponent);
+        var_dump($result);
+        return "Hello World";
+    }
 
     function index() {
         $this->data['pagebody'] = 'teamsView';    // this is the view we want shown

@@ -265,4 +265,105 @@ class MY_Model extends CI_Model implements Active_Record {
 
 }
 
+class MY_Model2 extends MY_Model {
+
+    protected $_keyField2;                 // second part of composite primary key
+
+    // Constructor
+
+    function __construct($tablename = null, $keyfield = 'id', $keyfield2 = 'part') {
+        parent::__construct($tablename, $keyfield);
+        $this->_keyField2 = $keyfield2;
+    }
+
+//---------------------------------------------------------------------------
+//  Record-oriented functions
+//---------------------------------------------------------------------------
+    // Retrieve an existing DB record as an object
+    function get($key1, $key2) {
+        $this->db->where($this->_keyField, $key1);
+        $this->db->where($this->_keyField2, $key2);
+        $query = $this->db->get($this->_tableName);
+        if ($query->num_rows() < 1)
+            return null;
+        return $query->row();
+    }
+
+    // Update a record in the DB
+    function update($record) {
+        // convert object to associative array, if needed
+        if (is_object($record)) {
+            $data = get_object_vars($record);
+        } else {
+            $data = $record;
+        }
+        // update the DB table appropriately
+        $key = $data[$this->_keyField];
+        $key2 = $data[$this->_keyField2];
+        $this->db->where($this->_keyField, $key);
+        $this->db->where($this->_keyField2, $key2);
+        $object = $this->db->update($this->_tableName, $data);
+    }
+
+    // Delete a record from the DB
+    function delete($key1, $key2) {
+        $this->db->where($this->_keyField, $key1);
+        $this->db->where($this->_keyField2, $key2);
+        $object = $this->db->delete($this->_tableName);
+    }
+
+    // Determine if a key exists
+    function exists($key1, $key2) {
+        $this->db->where($this->_keyField, $key1);
+        $this->db->where($this->_keyField2, $key2);
+        $query = $this->db->get($this->_tableName);
+        if ($query->num_rows() < 1)
+            return false;
+        return true;
+    }
+
+//---------------------------------------------------------------------------
+//  Composite functions
+//---------------------------------------------------------------------------
+    // Return all records associated with a member
+    function group($key) {
+        $this->db->where($this->_keyField, $key);
+        $this->db->order_by($this->_keyField, 'asc');
+        $this->db->order_by($this->_keyField2, 'asc');
+        $query = $this->db->get($this->_tableName);
+        return $query->result();
+    }
+
+    // Delete all records associated with a member
+    function delete_some($key) {
+        $this->db->where($this->_keyField, $key);
+        $object = $this->db->delete($this->_tableName);
+    }
+
+    // Determine the highest secondary key associated with a primary
+    function highest_some($key) {
+        $this->db->where($this->_keyField, $key);
+        $query = $this->db->get($this->_tableName);
+        $highest = -1;
+        foreach ($query->result() as $record) {
+            $key2 = $record->{$this->_keyField2};
+            if ($key2 > $highest)
+                $highest = $key2;
+        }
+        return $highest;
+    }
+
+//---------------------------------------------------------------------------
+//  Aggregate functions
+//---------------------------------------------------------------------------
+    // Return all records as an array of objects
+    function all($primary = null) {
+        $this->db->order_by($this->_keyField, 'asc');
+        $this->db->order_by($this->_keyField2, 'asc');
+        $query = $this->db->get($this->_tableName);
+        return $query->result();
+    }
+
+}
+
 /* End of file */
