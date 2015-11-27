@@ -1,16 +1,20 @@
 <h3>Calculate Probability of Victory</h3>
 
-<form action="Team/getProbabilityOfVictory" method="post">
 {ddlOpposingTeam}
-<button onclick="postResult()">Submit</button>
-</form>
+<button id="submitButton">Submit</button>
 
-<div id="predictionResult" name="predictionResult"></div>
+<label id="text"></label>
+<div id="predictionResult"></div>
 
 <script>
+$("#submitButton").click(function(){
+    var value = $("#ddlOpposingTeam").val();
+    //$("#text").text(value);
     
-function postResult() {
-    document.getElementById("predictionResult").innerHTML = "Hello World";
-}
+    $.ajax({url: "Team/getProbabilityOfVictory/" + value, success: function(result){
+        //$("#predictionResult").text("The result is" + result);
+        $("#predictionResult").html(result);
+    }});
+});
 
 </script>

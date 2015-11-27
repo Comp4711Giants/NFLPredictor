@@ -74,7 +74,7 @@ if (!function_exists('makeComboField')) {
             $row = array(
                 'val' => $val,
                 'selected' => ($val == $value) ? 'selected="true"' : '',
-                'display' => htmlentities($display['name'])
+                'display' => htmlentities($display)
             );
             $choices[] = $row;
         }

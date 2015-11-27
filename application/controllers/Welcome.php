@@ -14,6 +14,7 @@ class Welcome extends Application {
         $value = "NE";
         $options = $this->teams->getAllTeamCodes();
         
+        $this->load->helper('MY_formfields');
         $this->data['ddlOpposingTeam'] = makeComboField($label, $name, $value, $options);
         
         $this->render();

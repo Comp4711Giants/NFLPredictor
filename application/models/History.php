@@ -14,6 +14,7 @@ class History extends MY_Model2 {
     }
     
     public function getProbabilityOfVictory($opponent) {
+        
         $this->db->order_by('date', 'desc');
         $this->db->where('team', 'NYG');
         $query = $this->db->get("history");
@@ -48,7 +49,7 @@ class History extends MY_Model2 {
             }
         }
         if ($gameCount < 5) {
-            return "Hello World";
+            return "INVALID";
         }
         
         $probability = (0.7 * ($winCount / $gameCount)) + (0.2 * ($winCountLast5 / 5)) + (0.1 * ($winCountLast5AgainstOpponent / 5));
