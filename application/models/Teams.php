@@ -14,6 +14,18 @@ class Teams extends MY_Model {
         parent::__construct("teams", "id");
     }
     
+    // retrieve team codes
+    public function getAllTeamCodes() {
+        $teamCodes = array();
+        // iterate over the data until we find all the ones we want
+        $all = $this->all();
+        foreach ($all as $record)
+            if ($record->id != "NYG") {
+                $teamCodes[] = array('id' => $record->id, 'name' => $record->name);  
+            }
+        return $teamCodes;
+    }
+    
     // retrieve AFC teams
     public function getAFC() {
         $teamsAFC = array();

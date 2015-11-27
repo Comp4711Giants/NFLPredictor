@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('players', 'teams');
+$autoload['model'] = array('players', 'teams', 'history');
 
 
 /* End of file autoload.php */

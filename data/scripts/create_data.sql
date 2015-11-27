@@ -120,3 +120,35 @@ INSERT INTO `teams` (`id`, `name`, `city`, `conference`, `division`, `logo`) VAL
 ('SD', 'Chargers', 'San Diego', 'AFC', 'West', 'sd.png');
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `teams`
+--
+
+DROP TABLE IF EXISTS `history`;
+CREATE TABLE IF NOT EXISTS `history` (
+  `team` varchar(3) NOT NULL,
+  `opponent` varchar(3) NOT NULL,
+  `date` date NOT NULL,
+  `score` varchar(50) NOT NULL,
+  `win` bool NOT NULL,
+  PRIMARY KEY (`team`, `date`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `history` (`team`, `opponent`, `date`, `score`, `win`) VALUES
+('NYG', 'WAS', '2015-01-01', 5, true),
+('WAS', 'NYG', '2015-01-01', 3, false),
+('NYG', 'WAS', '2015-02-01', 15, true),
+('WAS', 'NYG', '2015-02-01', 3, false),
+('NYG', 'WAS', '2015-03-01', 15, true),
+('WAS', 'NYG', '2015-03-01', 3, false),
+('NYG', 'WAS', '2015-04-01', 12, true),
+('WAS', 'NYG', '2015-04-01', 3, false),
+('NYG', 'WAS', '2015-05-01', 10, true),
+('WAS', 'NYG', '2015-05-01', 3, false);
+
+-- --------------------------------------------------------

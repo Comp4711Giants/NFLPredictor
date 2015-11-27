@@ -19,6 +19,8 @@ if (!defined('APPPATH'))
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
         <link href="/assets/css/pagination.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -34,7 +36,7 @@ if (!defined('APPPATH'))
                 Copyright &copy; 2015,  <a href="https://github.com/Comp4711Giants/">Comp4711Giants</a>.
             </div>
         </div>
-        <script src="/assets/js/jquery-1.11.1.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>
+
+        
     </body>
 </html>
