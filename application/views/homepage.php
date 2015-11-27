@@ -3,8 +3,8 @@
 {ddlOpposingTeam}
 <button id="submitButton">Submit</button>
 
-<label id="text"></label>
 <div id="predictionResult"></div>
+<label id="predictionExplanation"></label>
 
 <script>
 $("#submitButton").click(function(){
@@ -14,6 +14,8 @@ $("#submitButton").click(function(){
     $.ajax({url: "Team/getProbabilityOfVictory/" + value, success: function(result){
         //$("#predictionResult").text("The result is" + result);
         $("#predictionResult").html(result);
+        $("#predictionExplanation").html("Formula: 70% * (overall average) + 20% * (last 5 games average) + 10% * (average of last 5 games against this opponent)");
+        
     }});
 });
 
