@@ -21,7 +21,7 @@ class Team extends Application {
         }
         else {
             $result = $this->history->getProbabilityOfVictory($opponent);
-            echo "Your probability of victory is " . $result;
+            echo "Your probability of victory is " . $result . "%";
         }
     }
 
