@@ -52,8 +52,8 @@ class History extends MY_Model2 {
             return "INVALID";
         }
         
-        $probability = (0.7 * ($winCount / $gameCount)) + (0.2 * ($winCountLast5 / 5)) + (0.1 * ($winCountLast5AgainstOpponent / 5));
-                
+        $probability = 100 * ((0.7 * ($winCount / $gameCount)) + (0.2 * ($winCountLast5 / 5)) 
+            + (0.1 * ($winCountLast5AgainstOpponent / 5)));
         return $probability;
     }
 }
