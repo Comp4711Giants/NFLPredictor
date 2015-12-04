@@ -88,15 +88,18 @@ class History extends MY_Model2 {
                 'opponent' => $awayTeam,
                 'date' => $gameDate,
                 'score' => $homeTeamScore,
-                'win' => $isWin
+                'win' => $isWin,
+                'isHomeGame' => true
             );
 
+            //assuming first team is home team
             $secondEntry = array (
                 'team' => $awayTeam,
                 'opponent' => $homeTeam,
                 'date' => $gameDate,
                 'score' => $awayTeamScore,
-                'win' => !$isWin
+                'win' => !$isWin,
+                'isHomeGame' => false
             );
             
             //push the array of teams and their scores back to 

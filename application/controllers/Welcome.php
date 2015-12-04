@@ -47,8 +47,8 @@ class Welcome extends Application {
         echo '<h1>' . "BREAK" . '</h1>';
         foreach ($updatedTeams as $team) {
             var_dump($team['date']);
-            $dates = $this->Teams->updateScores($team);
-            foreach($dates as $d) {
+            //$dates = $this->Teams->updateScores($team);
+            foreach($team as $d) {
                 echo $d;
             }
         }
