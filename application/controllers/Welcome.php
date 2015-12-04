@@ -41,13 +41,18 @@ class Welcome extends Application {
         $list = $this->xmlrpc->display_response();
         
         $this->load->model('History');
-        $testVar = $this->History->updateGameRecords($list);
-        var_dump($list);
+        $updatedTeams = $this->History->updateGameRecords($list);
 
+        $this->load->model('Teams');
         echo '<h1>' . "BREAK" . '</h1>';
-        foreach ($testVar as $tv) {
-            echo $tv . " ";
+        foreach ($updatedTeams as $team) {
+            var_dump($team['date']);
+            $dates = $this->Teams->updateScores($team);
+            foreach($dates as $d) {
+                echo $d;
+            }
         }
+
 
 
         $label = "Select the opposing team:";

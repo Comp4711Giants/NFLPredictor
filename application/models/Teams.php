@@ -49,4 +49,30 @@ class Teams extends MY_Model {
             }
         return $teamsNFC;
     }
+
+    public function updateScores($team) {
+       // //create query to find matching team in record
+       //  $teamName = $team['team'];
+       //  $date = $team['date'];
+       //  //echo $date("Y-m-d", strtotime($date));
+
+       //  $oldData = $this->db->where('name', $teamName);
+       //  $oldDate = $oldData['date'];
+
+       //  $dates = array();
+        
+
+       //  array_push($dates, $date, $oldDate);
+        $points = 5;
+
+        $teamObj = $this->db->get('teams', $team);
+        $id = $teamObj->id;
+        $teamScore = $teamObj->score;
+        $teamScore += $points;
+        $updatedTeam = $teamObj;
+
+
+        return $updatedTeam;
+
+    }
 }
