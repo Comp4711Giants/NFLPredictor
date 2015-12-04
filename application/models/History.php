@@ -56,4 +56,36 @@ class History extends MY_Model2 {
             + (0.1 * ($winCountLast5AgainstOpponent / 5)));
         return $probability;
     }
+
+
+    public function updateGameRecords($list) {
+
+        $team = array();
+
+        foreach($list as $record) {
+            $homeTeam = $record['home'];
+            $awayTeam = $record['away'];
+            //get substrings of date
+            $gameYear = substr($record['date'], 0, 4);
+            $gameMonth = substr($record['date'], 4, 2);
+            $gameDay = substr($record['date'], 6, 2);
+            //create date
+            $gameDate = $gameYear . "-" . $gameMonth . "-" . $gameDay;
+            //explode score ##:##
+            $scores = explode(":", $record['score']);
+            $homeTeamScore = $scores[0];
+            $awayTeamScore = $scores[1];
+            //find which team won
+            $win = $homeTeamScore > $awayTeamScore;
+            array_push($team, $homeTeam, $awayTeam, $gameDate, $homeTeamScore, $awayTeamScore, $win);
+
+            //create entries for each team as "home team" to get only one score per row
+            $firstEntry = array(
+                'team' => $homeTeam,
+                ''
+            );
+        }
+
+        return $team;
+    }
 }

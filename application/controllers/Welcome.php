@@ -1,6 +1,20 @@
 <?php
 
+/**
+ * Our homepage. Show the most recently added quote.
+ * 
+ * controllers/Welcome.php
+ *
+ * ------------------------------------------------------------------------
+ */
+define('LOCAL', false);   // control whether we access our model locally, or over XML-RPC
+define('RPCSERVER', ('nfl.jlparry.com/rpc'));   // endpoint fo the XML-RPC server
+define('RPCPORT', 80); // port the XML-RPC service is listening on
+
+            
+
 class Welcome extends Application {
+
 
     function __construct() {
         parent::__construct();
@@ -8,7 +22,34 @@ class Welcome extends Application {
 
     function index() {
         $this->data['pagebody'] = 'homepage';
+        // get the list of airports that can be flown from
+        $list = array();
+        // use XML-RPC to get the list
+        $this->load->library('xmlrpc');
+        $this->xmlrpc->server(RPCSERVER, RPCPORT);
+        $this->xmlrpc->method('since');
+        $request = array();
+        $this->xmlrpc->request($request);
+
+        //$this->xmlrpc->set_debug(true);
+
+        if (!$this->xmlrpc->send_request())
+        {
+            echo $this->xmlrpc->display_error();
+        }
+
+        $list = $this->xmlrpc->display_response();
         
+        $this->load->model('History');
+        $testVar = $this->History->updateGameRecords($list);
+        var_dump($list);
+
+        echo '<h1>' . "BREAK" . '</h1>';
+        foreach ($testVar as $tv) {
+            echo $tv . " ";
+        }
+
+
         $label = "Select the opposing team:";
         $name = "ddlOpposingTeam";
         $value = "NE";
@@ -17,6 +58,8 @@ class Welcome extends Application {
         $this->load->helper('formfields');
         $this->data['ddlOpposingTeam'] = makeComboField($label, $name, $value, $options);
         
+       
+
         $this->render();
     }
 
