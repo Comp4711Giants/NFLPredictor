@@ -49,4 +49,10 @@ class Teams extends MY_Model {
             }
         return $teamsNFC;
     }
+
+    public function getLeague() {
+        $teams = array();
+        $teams = $this->all();
+        return $teams;
+    }
 }
