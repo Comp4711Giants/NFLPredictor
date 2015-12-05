@@ -51,28 +51,51 @@ class Teams extends MY_Model {
     }
 
     public function updateScores($team) {
-       // //create query to find matching team in record
-       //  $teamName = $team['team'];
-       //  $date = $team['date'];
-       //  //echo $date("Y-m-d", strtotime($date));
+        // $points = 5;
+        $varCheck = array();
 
-       //  $oldData = $this->db->where('name', $teamName);
-       //  $oldDate = $oldData['date'];
+         // $firstEntry = array(
+         //        'team' => $homeTeam,
+         //        'opponent' => $awayTeam,
+         //        'date' => $gameDate,
+         //        'score' => $homeTeamScore,
+         //        'win' => $isWin,
+         //        'isHomeGame' => true
+         //    );
 
-       //  $dates = array();
+        $teamCode = $team['team'];
+        $isWin = $team['win'];
+        $pointsToAdd = $team['score'];
+        $pointsAgainst = $team['scoreAgainst'];
+
+        if ($isWin == false) {
+            $query = $this->db->get_where('teams', array('id' => $teamCode));
+            $teamObj = $query->row();
+            $id = $teamObj->id;
+            $currTeamScore = $teamObj->points_for + $pointsToAdd;
+            $currScoreAgainst = $teamObj->points_against + $pointsAgainst;
+            $udTeam = $teamObj;          
+            $udTeam->points_for = $currTeamScore;
+            $udTeam->points_against = $currScoreAgainst;
+            $udTeam->net_points = $currTeamScore - $currScoreAgainst;
+            $udTeam->wins += 1;
+            $this->db->replace('teams', $udTeam);
+        } else {
+            $query = $this->db->get_where('teams', array('id' => $teamCode));
+            $teamObj = $query->row();
+            $id = $teamObj->id;
+            $currTeamScore = $teamObj->points_for + $pointsToAdd;
+            $currScoreAgainst = $teamObj->points_against + $pointsAgainst;
+            $udTeam = $teamObj;
+            $udTeam->points_for = $currTeamScore;
+            $udTeam->points_against = $currScoreAgainst;
+            $udTeam->net_points = $currTeamScore - $currScoreAgainst;
+            $udTeam->losses += 1;
+            $this->db->replace('teams', $udTeam);
+        }
         
 
-       //  array_push($dates, $date, $oldDate);
-        $points = 5;
-
-        $teamObj = $this->db->get('teams', $team);
-        $id = $teamObj->id;
-        $teamScore = $teamObj->score;
-        $teamScore += $points;
-        $updatedTeam = $teamObj;
-
-
-        return $updatedTeam;
-
+        return $varCheck;
     }
+
 }

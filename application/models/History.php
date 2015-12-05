@@ -29,6 +29,7 @@ class History extends MY_Model2 {
         $gameCountAgainstOpponent = 0;
         $winCountAgainstOpponent = 0;
         $winCountLast5AgainstOpponent = 0;
+        $checker = array();
         
         foreach($us as $game) {
             $gameCount++;
@@ -38,7 +39,8 @@ class History extends MY_Model2 {
             if ($gameCount == 5) {
                 $winCountLast5 = $winCount;
             }
-            if($game->opponent == $opponent) {
+            if(strcmp($game->opponent, $opponent) == 0) {
+                array_push($checker, $game->opponent);
                 $gameCountAgainstOpponent++;
                 if($game->win) {
                     $winCountAgainstOpponent++;
@@ -61,6 +63,7 @@ class History extends MY_Model2 {
     public function updateGameRecords($list) {
 
         $team = array();
+        $qteam = array();
 
         //delete all entries from the table
         $this->db->empty_table('history');
@@ -76,10 +79,10 @@ class History extends MY_Model2 {
             $gameDate = $gameYear . "-" . $gameMonth . "-" . $gameDay;
             //explode score ##:##
             $scores = explode(":", $record['score']);
-            $homeTeamScore = $scores[0];
-            $awayTeamScore = $scores[1];
+            $homeTeamScore = $scores[1];
+            $awayTeamScore = $scores[0];
             //find which team won
-            $isWin = $homeTeamScore > $awayTeamScore;
+            $isWin = $homeTeamScore < $awayTeamScore;
             //array_push($team, $homeTeam, $awayTeam, $gameDate, $homeTeamScore, $awayTeamScore, $win);
 
             //create entries for each team as "home team" to get only one score per row
@@ -88,6 +91,7 @@ class History extends MY_Model2 {
                 'opponent' => $awayTeam,
                 'date' => $gameDate,
                 'score' => $homeTeamScore,
+                'scoreAgainst' => $awayTeamScore,
                 'win' => $isWin,
                 'isHomeGame' => true
             );
@@ -98,6 +102,7 @@ class History extends MY_Model2 {
                 'opponent' => $homeTeam,
                 'date' => $gameDate,
                 'score' => $awayTeamScore,
+                'scoreAgainst' => $homeTeamScore,
                 'win' => !$isWin,
                 'isHomeGame' => false
             );
@@ -110,8 +115,12 @@ class History extends MY_Model2 {
             $this->db->insert('history', $secondEntry);
 
 
+            $this->load->model('Teams');
+            $returnFirst = $this->Teams->updateScores($firstEntry);
+            $returnSecond = $this->Teams->updateScores($secondEntry);
+            array_push($qteam, $returnFirst, $returnSecond);
         }
 
-        return $team;
+        return $qteam;
     }
 }

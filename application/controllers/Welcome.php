@@ -40,19 +40,17 @@ class Welcome extends Application {
 
         $list = $this->xmlrpc->display_response();
         
+        $this->load->model('Teams');
+        $reset = array(
+            'wins' => 0,
+            'losses' => 0,
+            'points_for' => 0,
+            'points_against' => 0
+        );
+        $this->db->update('teams', $reset); 
         $this->load->model('History');
         $updatedTeams = $this->History->updateGameRecords($list);
-
-        $this->load->model('Teams');
-        echo '<h1>' . "BREAK" . '</h1>';
-        foreach ($updatedTeams as $team) {
-            var_dump($team['date']);
-            //$dates = $this->Teams->updateScores($team);
-            foreach($team as $d) {
-                echo $d;
-            }
-        }
-
+        //var_dump($updatedTeams);
 
 
         $label = "Select the opposing team:";
