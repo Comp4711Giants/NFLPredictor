@@ -78,6 +78,11 @@ CREATE TABLE IF NOT EXISTS `teams` (
   `conference` varchar(3) NOT NULL,
   `division` varchar(50) NOT NULL,
   `logo` varchar(50) NOT NULL,
+  `net_points` int NOT NULL,
+  `wins` int NOT NULL,
+  `losses` int NOT NULL,
+  `points_for` int NOT NULL,
+  `points_against` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -85,39 +90,39 @@ CREATE TABLE IF NOT EXISTS `teams` (
 -- Dumping data for table `teams`
 --
 
-INSERT INTO `teams` (`id`, `name`, `city`, `conference`, `division`, `logo`) VALUES
-('DAL', 'Cowboys', 'Dallas', 'NFC', 'East', 'dal.png'),
-('NYG', 'Giants', 'New York', 'NFC', 'East', 'nyg.png'),
-('WAS', 'Redskins', 'Washington', 'NFC', 'East', 'was.png'),
-('PHI', 'Eagles', 'Philadelphia', 'NFC', 'East', 'phi.png'),
-('GB', 'Packers', 'Green Bay', 'NFC', 'North', 'gb.png'),
-('MIN', 'Vikings', 'Minnesota', 'NFC', 'North', 'min.png'),
-('DET', 'Lions', 'Detroit', 'NFC', 'North', 'det.png'),
-('CHI', 'Bears', 'Chicago', 'NFC', 'North', 'chi.png'),
-('CAR', 'Panthers', 'Carolina', 'NFC', 'South', 'car.png'),
-('ATL', 'Falcons', 'Atlanta', 'NFC', 'South', 'atl.png'),
-('TB', 'Buccaneers', 'Tampa Bay', 'NFC', 'South', 'tb.png'),
-('NO', 'Saints', 'New Orleans', 'NFC', 'South', 'no.png'),
-('ARI', 'Cardinals', 'Arizona', 'NFC', 'West', 'ari.png'),
-('STL', 'Rams', 'St. Louis', 'NFC', 'West', 'stl.png'),
-('SF', '49ers', 'San Francisco', 'NFC', 'West', 'sf.png'),
-('SEA', 'Seahawks', 'Seattle', 'NFC', 'West', 'sea.png'),
-('NE', 'Patriots', 'New England', 'AFC', 'East', 'ne.png'),
-('BUF', 'Bills', 'Buffalo', 'AFC', 'East', 'buf.png'),
-('NYJ', 'Jets', 'New York', 'AFC', 'East', 'nyj.png'),
-('MIA', 'Dolphins', 'Miami', 'AFC', 'East', 'mia.png'),
-('CIN', 'Bengals', 'Cincinnati', 'AFC', 'North', 'cin.png'),
-('PIT', 'Steelers', 'Pittsburgh', 'AFC', 'North', 'pit.png'),
-('CLE', 'Browns', 'Cleveland', 'AFC', 'North', 'cle.png'),
-('BAL', 'Ravens', 'Baltimore', 'AFC', 'North', 'bal.png'),
-('IND', 'Colts', 'Indianapolis', 'AFC', 'South', 'ind.png'),
-('TEN', 'Titans', 'Tennessee', 'AFC', 'South', 'ten.png'),
-('HOU', 'Texans', 'Houston', 'AFC', 'South', 'hou.png'),
-('JAC', 'Jaguars', 'Jacksonville', 'AFC', 'South', 'jac.png'),
-('DEN', 'Broncos', 'Denver', 'AFC', 'West', 'den.png'),
-('OAK', 'Raiders', 'Oakland', 'AFC', 'West', 'oak.png'),
-('KC', 'Chiefs', 'Kansas City', 'AFC', 'West', 'kc.png'),
-('SD', 'Chargers', 'San Diego', 'AFC', 'West', 'sd.png');
+INSERT INTO `teams` (`id`, `name`, `city`, `conference`, `division`, `logo`, `net_points`, `wins`, `losses`, `points_for`, `points_against`) VALUES
+('DAL', 'Cowboys', 'Dallas', 'NFC', 'East', 'dal.png', 1, 0, 0, 0, 0),
+('NYG', 'Giants', 'New York', 'NFC', 'East', 'nyg.png', 2, 0, 0, 0, 0),
+('WAS', 'Redskins', 'Washington', 'NFC', 'East', 'was.png', 3, 0, 0, 0, 0),
+('PHI', 'Eagles', 'Philadelphia', 'NFC', 'East', 'phi.png', 4, 0, 0, 0, 0),
+('GB', 'Packers', 'Green Bay', 'NFC', 'North', 'gb.png', 5, 0, 0, 0, 0),
+('MIN', 'Vikings', 'Minnesota', 'NFC', 'North', 'min.png', 6, 0, 0, 0, 0),
+('DET', 'Lions', 'Detroit', 'NFC', 'North', 'det.png', 7, 0, 0, 0, 0),
+('CHI', 'Bears', 'Chicago', 'NFC', 'North', 'chi.png', 8, 0, 0, 0, 0),
+('CAR', 'Panthers', 'Carolina', 'NFC', 'South', 'car.png', 9, 0, 0, 0, 0),
+('ATL', 'Falcons', 'Atlanta', 'NFC', 'South', 'atl.png', 10, 0, 0, 0, 0),
+('TB', 'Buccaneers', 'Tampa Bay', 'NFC', 'South', 'tb.png', 11, 0, 0, 0, 0),
+('NO', 'Saints', 'New Orleans', 'NFC', 'South', 'no.png', 12, 0, 0, 0, 0),
+('ARI', 'Cardinals', 'Arizona', 'NFC', 'West', 'ari.png', 13, 0, 0, 0, 0),
+('STL', 'Rams', 'St. Louis', 'NFC', 'West', 'stl.png', 14, 0, 0, 0, 0),
+('SF', '49ers', 'San Francisco', 'NFC', 'West', 'sf.png', 15, 0, 0, 0, 0),
+('SEA', 'Seahawks', 'Seattle', 'NFC', 'West', 'sea.png', 16, 0, 0, 0, 0),
+('NE', 'Patriots', 'New England', 'AFC', 'East', 'ne.png', 17, 0, 0, 0, 0),
+('BUF', 'Bills', 'Buffalo', 'AFC', 'East', 'buf.png', 18, 0, 0, 0, 0),
+('NYJ', 'Jets', 'New York', 'AFC', 'East', 'nyj.png', 19, 0, 0, 0, 0),
+('MIA', 'Dolphins', 'Miami', 'AFC', 'East', 'mia.png', 20, 0, 0, 0, 0),
+('CIN', 'Bengals', 'Cincinnati', 'AFC', 'North', 'cin.png', 21, 0, 0, 0, 0),
+('PIT', 'Steelers', 'Pittsburgh', 'AFC', 'North', 'pit.png', 22, 0, 0, 0, 0),
+('CLE', 'Browns', 'Cleveland', 'AFC', 'North', 'cle.png', 23, 0, 0, 0, 0),
+('BAL', 'Ravens', 'Baltimore', 'AFC', 'North', 'bal.png', 24, 0, 0, 0, 0),
+('IND', 'Colts', 'Indianapolis', 'AFC', 'South', 'ind.png', 25, 0, 0, 0, 0),
+('TEN', 'Titans', 'Tennessee', 'AFC', 'South', 'ten.png', 26, 0, 0, 0, 0),
+('HOU', 'Texans', 'Houston', 'AFC', 'South', 'hou.png', 27, 0, 0, 0, 0),
+('JAC', 'Jaguars', 'Jacksonville', 'AFC', 'South', 'jac.png', 28, 0, 0, 0, 0),
+('DEN', 'Broncos', 'Denver', 'AFC', 'West', 'den.png', 29, 0, 0, 0, 0),
+('OAK', 'Raiders', 'Oakland', 'AFC', 'West', 'oak.png', 30, 0, 0, 0, 0),
+('KC', 'Chiefs', 'Kansas City', 'AFC', 'West', 'kc.png', 31, 0, 0, 0, 0),
+('SD', 'Chargers', 'San Diego', 'AFC', 'West', 'sd.png', 32, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -131,7 +136,9 @@ CREATE TABLE IF NOT EXISTS `history` (
   `opponent` varchar(3) NOT NULL,
   `date` date NOT NULL,
   `score` varchar(50) NOT NULL,
+  `scoreAgainst` varchar(50),
   `win` bool NOT NULL,
+  `isHomeGame` bool NOT NUll,
   PRIMARY KEY (`team`, `date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -139,16 +146,16 @@ CREATE TABLE IF NOT EXISTS `history` (
 -- Dumping data for table `teams`
 --
 
-INSERT INTO `history` (`team`, `opponent`, `date`, `score`, `win`) VALUES
-('NYG', 'WAS', '2015-01-01', 5, true),
-('WAS', 'NYG', '2015-01-01', 3, false),
-('NYG', 'WAS', '2015-02-01', 15, true),
-('WAS', 'NYG', '2015-02-01', 3, false),
-('NYG', 'WAS', '2015-03-01', 15, true),
-('WAS', 'NYG', '2015-03-01', 3, false),
-('NYG', 'WAS', '2015-04-01', 12, true),
-('WAS', 'NYG', '2015-04-01', 3, false),
-('NYG', 'WAS', '2015-05-01', 10, true),
-('WAS', 'NYG', '2015-05-01', 3, false);
+INSERT INTO `history` (`team`, `opponent`, `date`, `score`, `win`, `isHomeGame`) VALUES
+('NYG', 'WAS', '2015-01-01', 5, true, true),
+('WAS', 'NYG', '2015-01-01', 3, false, false),
+('NYG', 'WAS', '2015-02-01', 15, true, false),
+('WAS', 'NYG', '2015-02-01', 3, false, true),
+('NYG', 'WAS', '2015-03-01', 15, true, true),
+('WAS', 'NYG', '2015-03-01', 3, false, false),
+('NYG', 'WAS', '2015-04-01', 12, true, false),
+('WAS', 'NYG', '2015-04-01', 3, false, true),
+('NYG', 'WAS', '2015-05-01', 10, true, true),
+('WAS', 'NYG', '2015-05-01', 3, false, false);
 
 -- --------------------------------------------------------
