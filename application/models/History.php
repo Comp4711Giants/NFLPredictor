@@ -82,7 +82,7 @@ class History extends MY_Model2 {
             $homeTeamScore = $scores[1];
             $awayTeamScore = $scores[0];
             //find which team won
-            $isWin = $homeTeamScore < $awayTeamScore;
+            $isWin = $homeTeamScore > $awayTeamScore;
             //array_push($team, $homeTeam, $awayTeam, $gameDate, $homeTeamScore, $awayTeamScore, $win);
 
             //create entries for each team as "home team" to get only one score per row
@@ -114,7 +114,7 @@ class History extends MY_Model2 {
             $this->db->insert('history', $firstEntry);
             $this->db->insert('history', $secondEntry);
 
-
+            //send teams to the TEAMS model to be updated
             $this->load->model('Teams');
             $returnFirst = $this->Teams->updateScores($firstEntry);
             $returnSecond = $this->Teams->updateScores($secondEntry);
