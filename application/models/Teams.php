@@ -28,6 +28,11 @@ class Teams extends MY_Model {
     
     // retrieve teams from a certain conference
     public function getConference($sort, $conference) {
+        //check iif sort variable is by net points
+        if ($sort == "net_points") {
+            //if true, sort in descending order
+           $this->db->order_by($sort, 'desc'); 
+        }
         $this->db->order_by($sort, 'asc');
         $teams = array();
         // iterate over the data until we find all the ones we want
@@ -41,6 +46,9 @@ class Teams extends MY_Model {
 
     // retrieve teams from a certain conference and division
     public function getConferenceDivision($sort, $conference, $division) {
+        if ($sort == "net_points") {
+           $this->db->order_by($sort, 'desc'); 
+        }
         $this->db->order_by($sort, 'asc');
         $teams = array();
         // iterate over the data until we find all the ones we want
@@ -54,7 +62,11 @@ class Teams extends MY_Model {
         return $teams;
     }
 
+    //for sorting by league
     public function getLeague($sort) {
+        if ($sort == "net_points") {
+           $this->db->order_by($sort, 'desc'); 
+        }
         $this->db->order_by($sort, 'asc');
         $teams = array();
         $teams = $this->all();
