@@ -39,30 +39,34 @@ class Welcome extends Application {
         }
 
         $list = $this->xmlrpc->display_response();
-        
+        //load team model
         $this->load->model('Teams');
+        //reset # values to 0 in teams table because we pull
+        //all the data at once
         $reset = array(
             'wins' => 0,
             'losses' => 0,
             'points_for' => 0,
             'points_against' => 0
         );
+        //update teams table with above data
         $this->db->update('teams', $reset); 
+        //switch to history model
         $this->load->model('History');
+        //pass XMLRPC $list of data to History model
         $updatedTeams = $this->History->updateGameRecords($list);
-        //var_dump($updatedTeams);
 
 
+        //Prediction section
         $label = "Select the opposing team:";
         $name = "ddlOpposingTeam";
         $value = "NE";
+        //load all teams to drop down list
         $options = $this->teams->getAllTeamCodes();
         
         $this->load->helper('formfields');
         $this->data['ddlOpposingTeam'] = makeComboField($label, $name, $value, $options);
-        
-       
-
+    
         $this->render();
     }
 

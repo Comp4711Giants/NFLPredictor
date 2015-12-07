@@ -157,5 +157,4 @@ INSERT INTO `history` (`team`, `opponent`, `date`, `score`, `win`, `isHomeGame`)
 ('WAS', 'NYG', '2015-04-01', 3, false, true),
 ('NYG', 'WAS', '2015-05-01', 10, true, true),
 ('WAS', 'NYG', '2015-05-01', 3, false, false);
-
 -- --------------------------------------------------------

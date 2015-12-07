@@ -13,6 +13,7 @@ class History extends MY_Model2 {
         parent::__construct("history", "team", "date");
     }
     
+    //calculates probability for NYG win vs. $opponent team
     public function getProbabilityOfVictory($opponent) {
         
         $this->db->order_by('date', 'desc');
@@ -59,7 +60,7 @@ class History extends MY_Model2 {
         return $probability;
     }
 
-
+    //gets raw data from xml rpc service and inputs into the history table
     public function updateGameRecords($list) {
 
         $team = array();
@@ -116,6 +117,7 @@ class History extends MY_Model2 {
 
             //send teams to the TEAMS model to be updated
             $this->load->model('Teams');
+            //pass two teams object to updateScores() in Teams model.
             $returnFirst = $this->Teams->updateScores($firstEntry);
             $returnSecond = $this->Teams->updateScores($secondEntry);
             array_push($qteam, $returnFirst, $returnSecond);
