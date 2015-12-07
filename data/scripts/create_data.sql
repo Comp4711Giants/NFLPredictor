@@ -136,7 +136,9 @@ CREATE TABLE IF NOT EXISTS `history` (
   `opponent` varchar(3) NOT NULL,
   `date` date NOT NULL,
   `score` varchar(50) NOT NULL,
+  `scoreAgainst` varchar(50),
   `win` bool NOT NULL,
+  `isHomeGame` bool NOT NUll,
   PRIMARY KEY (`team`, `date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -144,16 +146,16 @@ CREATE TABLE IF NOT EXISTS `history` (
 -- Dumping data for table `teams`
 --
 
-INSERT INTO `history` (`team`, `opponent`, `date`, `score`, `win`) VALUES
-('NYG', 'WAS', '2015-01-01', 5, true),
-('WAS', 'NYG', '2015-01-01', 3, false),
-('NYG', 'WAS', '2015-02-01', 15, true),
-('WAS', 'NYG', '2015-02-01', 3, false),
-('NYG', 'WAS', '2015-03-01', 15, true),
-('WAS', 'NYG', '2015-03-01', 3, false),
-('NYG', 'WAS', '2015-04-01', 12, true),
-('WAS', 'NYG', '2015-04-01', 3, false),
-('NYG', 'WAS', '2015-05-01', 10, true),
-('WAS', 'NYG', '2015-05-01', 3, false);
+INSERT INTO `history` (`team`, `opponent`, `date`, `score`, `win`, `isHomeGame`) VALUES
+('NYG', 'WAS', '2015-01-01', 5, true, true),
+('WAS', 'NYG', '2015-01-01', 3, false, false),
+('NYG', 'WAS', '2015-02-01', 15, true, false),
+('WAS', 'NYG', '2015-02-01', 3, false, true),
+('NYG', 'WAS', '2015-03-01', 15, true, true),
+('WAS', 'NYG', '2015-03-01', 3, false, false),
+('NYG', 'WAS', '2015-04-01', 12, true, false),
+('WAS', 'NYG', '2015-04-01', 3, false, true),
+('NYG', 'WAS', '2015-05-01', 10, true, true),
+('WAS', 'NYG', '2015-05-01', 3, false, false);
 
 -- --------------------------------------------------------
