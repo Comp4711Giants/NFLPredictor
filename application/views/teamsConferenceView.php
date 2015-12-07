@@ -16,6 +16,9 @@
 
 <div class="row">
     <table class="table-page-table">
+    	<tr>
+    		<th colspan="10">AFC</th>
+    	</tr>
 	    <tr>
 	        <th>ID</th>
 	        <th>City</th>
@@ -28,7 +31,7 @@
 	        <th>Points Against</th>
 	        <th>Net Points</th>
 	    </tr>
-	    {leagueTeams}
+	    {afcTeams}
 	    <tr>
 	        <td>{id}</td>
 	        <td>{city}</td>
@@ -41,6 +44,35 @@
 	        <td>{points_against}</td>
 	        <td>{net_points}</td>
 	    </tr>
-	    {/leagueTeams}
+	    {/afcTeams}
+	    <tr>
+    		<th colspan="10">NFC</th>
+    	</tr>
+	    <tr>
+	        <th>ID</th>
+	        <th>City</th>
+	        <th>Name</th>
+	        <th>Conference</th>
+	        <th>Division</th>
+	        <th>Wins</th>
+	        <th>Losses</th>
+	        <th>Points For</th>
+	        <th>Points Against</th>
+	        <th>Net Points</th>
+	    </tr>
+	    {nfcTeams}
+	    <tr>
+	        <td>{id}</td>
+	        <td>{city}</td>
+	        <td>{name}</td>
+	        <td>{conference}</td>
+	        <td>{division}</td>
+	        <td>{wins}</td>
+	        <td>{losses}</td>
+	        <td>{points_for}</td>
+	        <td>{points_against}</td>
+	        <td>{net_points}</td>
+	    </tr>
+	    {/nfcTeams}
 	</table>
 </div>

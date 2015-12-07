@@ -26,28 +26,39 @@ class Teams extends MY_Model {
         return $teamCodes;
     }
     
-    // retrieve AFC teams
-    public function getAFC() {
-        $teamsAFC = array();
+    // retrieve teams from a certain conference
+    public function getConference($sort, $conference) {
+        $this->db->order_by($sort, 'asc');
+        $teams = array();
         // iterate over the data until we find all the ones we want
         $all = $this->all();
         foreach ($all as $record)
-            if ($record->conference == "AFC") {
-                $teamsAFC[] = array('id' => $record->id, 'name' => $record->name, 'city' => $record->city, 'conference' => $record->conference, 'division' => $record->division, 'logo' => $record->logo);  
+            if ($record->conference == $conference) {
+                array_push($teams, $record);
             }
-        return $teamsAFC;
+        return $teams;
     }
-    
-    // retrieve NFC teams
-    public function getNFC() {
-        $teamsNFC = array();
+
+    // retrieve teams from a certain conference and division
+    public function getConferenceDivision($sort, $conference, $division) {
+        $this->db->order_by($sort, 'asc');
+        $teams = array();
         // iterate over the data until we find all the ones we want
         $all = $this->all();
         foreach ($all as $record)
-            if ($record->conference == "NFC") {
-                $teamsNFC[] = array('id' => $record->id, 'name' => $record->name, 'city' => $record->city, 'conference' => $record->conference, 'division' => $record->division, 'logo' => $record->logo);
+            if ($record->conference == $conference) {
+                if ($record->division == $division) {
+                    array_push($teams, $record);
+                }
             }
-        return $teamsNFC;
+        return $teams;
+    }
+
+    public function getLeague($sort) {
+        $this->db->order_by($sort, 'asc');
+        $teams = array();
+        $teams = $this->all();
+        return $teams;
     }
 
     public function updateScores($team) {
@@ -102,11 +113,5 @@ class Teams extends MY_Model {
             $udTeam->wins += 1;
             $this->db->replace('teams', $udTeam);
         }
-    }
-
-    public function getLeague() {
-        $teams = array();
-        $teams = $this->all();
-        return $teams;
     }
 }
