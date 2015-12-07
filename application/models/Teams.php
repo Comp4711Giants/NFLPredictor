@@ -14,27 +14,116 @@ class Teams extends MY_Model {
         parent::__construct("teams", "id");
     }
     
-    // retrieve AFC teams
-    public function getAFC() {
-        $teamsAFC = array();
+    // retrieve team codes
+    public function getAllTeamCodes() {
+        $teamCodes = array();
         // iterate over the data until we find all the ones we want
         $all = $this->all();
         foreach ($all as $record)
-            if ($record->conference == "AFC") {
-                $teamsAFC[] = array('id' => $record->id, 'name' => $record->name, 'city' => $record->city, 'conference' => $record->conference, 'division' => $record->division, 'logo' => $record->logo);  
+            if ($record->id != "NYG") {
+                $teamCodes[] = array('id' => $record->id, 'name' => $record->name);  
             }
-        return $teamsAFC;
+        return $teamCodes;
     }
     
-    // retrieve NFC teams
-    public function getNFC() {
-        $teamsNFC = array();
+    // retrieve teams from a certain conference
+    public function getConference($sort, $conference) {
+        //check iif sort variable is by net points
+        if ($sort == "net_points") {
+            //if true, sort in descending order
+           $this->db->order_by($sort, 'desc'); 
+        }
+        $this->db->order_by($sort, 'asc');
+        $teams = array();
         // iterate over the data until we find all the ones we want
         $all = $this->all();
         foreach ($all as $record)
-            if ($record->conference == "NFC") {
-                $teamsNFC[] = array('id' => $record->id, 'name' => $record->name, 'city' => $record->city, 'conference' => $record->conference, 'division' => $record->division, 'logo' => $record->logo);
+            if ($record->conference == $conference) {
+                array_push($teams, $record);
             }
-        return $teamsNFC;
+        return $teams;
+    }
+
+    // retrieve teams from a certain conference and division
+    public function getConferenceDivision($sort, $conference, $division) {
+        if ($sort == "net_points") {
+           $this->db->order_by($sort, 'desc'); 
+        }
+        $this->db->order_by($sort, 'asc');
+        $teams = array();
+        // iterate over the data until we find all the ones we want
+        $all = $this->all();
+        foreach ($all as $record)
+            if ($record->conference == $conference) {
+                if ($record->division == $division) {
+                    array_push($teams, $record);
+                }
+            }
+        return $teams;
+    }
+
+    //for sorting by league
+    public function getLeague($sort) {
+        if ($sort == "net_points") {
+           $this->db->order_by($sort, 'desc'); 
+        }
+        $this->db->order_by($sort, 'asc');
+        $teams = array();
+        $teams = $this->all();
+        return $teams;
+    }
+
+    public function updateScores($team) {
+       
+         // $firstEntry = array(
+         //        'team' => $homeTeam,
+         //        'opponent' => $awayTeam,
+         //        'date' => $gameDate,
+         //        'score' => $homeTeamScore,
+         //        'win' => $isWin,
+         //        'isHomeGame' => true
+         //    );
+
+        //get current values from HISTORY table passed from history model.
+        $teamCode = $team['team'];
+        $isWin = $team['win'];
+        $pointsToAdd = $team['score'];
+        $pointsAgainst = $team['scoreAgainst'];
+
+        //queries to add data to the teams table. 
+        //if loss
+        if ($isWin == false) {
+            //create query
+            $query = $this->db->get_where('teams', array('id' => $teamCode));
+            //return result as row
+            $teamObj = $query->row();
+            //get current team score and increment by new value
+            $currTeamScore = $teamObj->points_for + $pointsToAdd;
+            //get current points against team and increment by new value
+            $currScoreAgainst = $teamObj->points_against + $pointsAgainst;
+            //create new updated team object
+            $udTeam = $teamObj;        
+            //assign team points to points_for column  
+            $udTeam->points_for = $currTeamScore;
+            //assign team points against to points_against
+            $udTeam->points_against = $currScoreAgainst;
+            //assign net_points to new value
+            $udTeam->net_points = $currTeamScore - $currScoreAgainst;
+            //increment losses
+            $udTeam->losses += 1;
+            //update table
+            $this->db->replace('teams', $udTeam);
+        } else { //if win
+            $query = $this->db->get_where('teams', array('id' => $teamCode));
+            $teamObj = $query->row();
+            $currTeamScore = $teamObj->points_for + $pointsToAdd;
+            $currScoreAgainst = $teamObj->points_against + $pointsAgainst;
+            $udTeam = $teamObj;
+            $udTeam->points_for = $currTeamScore;
+            $udTeam->points_against = $currScoreAgainst;
+            $udTeam->net_points = $currTeamScore - $currScoreAgainst;
+            $udTeam->wins += 1;
+            $this->db->replace('teams', $udTeam);
+        }
     }
 }
