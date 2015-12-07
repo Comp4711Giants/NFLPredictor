@@ -104,4 +104,9 @@ class Teams extends MY_Model {
         }
     }
 
+    public function getLeague() {
+        $teams = array();
+        $teams = $this->all();
+        return $teams;
+    }
 }
